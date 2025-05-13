@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Discord Archive</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: url('your-background.jpg') no-repeat center center fixed;
+      background-size: cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .panel {
+      background-color: rgba(255, 255, 255, 0.9);
+      border-radius: 20px;
+      padding: 30px 40px;
+      width: 300px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    li {
+      margin: 10px 0;
+    }
+
+    a {
+      text-decoration: none;
+      color: #333;
+      font-weight: bold;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    /* Dropdown styles */
+    .dropdown {
+      position: relative;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      left: 0;
+      background-color: white;
+      min-width: 200px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      z-index: 1;
+      padding: 10px;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    .dropdown-content a {
+      display: block;
+      padding: 5px 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="panel">
+    <h1>Discord Archive</h1>
+    <ul>
+      <li><a href="general.html">#general</a></li>
+      <li><a href="announcements.html">#announcements</a></li>
+      <li><a href="memes.html">#memes</a></li>
+
+      <li class="dropdown">
+        <a href="#">Forums ▼</a>
+        <div class="dropdown-content">
+          <a href="form1.html">Form 1: Suggestions</a>
+          <a href="form2.html">Form 2: Bug Reports</a>
+          <a href="form3.html">Form 3: Applications</a>
+        </div>
+      </li>
+    </ul>
+  </div>
+</body>
+</html>
