@@ -23,12 +23,14 @@
       color: #555;
     }
 
-    .spoiler {
+    .spoiler, .chatlog__attachment--spoiler {
       filter: blur(5px);
       cursor: pointer;
       transition: filter 0.2s ease;
     }
-    .spoiler.revealed {
+
+    .spoiler.revealed,
+    .chatlog__attachment--spoiler.revealed {
       filter: none;
     }
   </style>
@@ -84,21 +86,26 @@
       }
     });
 
-      document.addEventListener("click", (e) => {
-      let target = e.target;
+    document.addEventListener("click", (e) => {
+      const target = e.target;
 
-      // If clicked on an image inside a spoiler span
-      if (target.tagName === "IMG" && target.parentElement.classList.contains("spoiler")) {
-        target.parentElement.classList.toggle("revealed");
-        return;
+      if (
+        target.classList.contains("spoiler") ||
+        target.classList.contains("chatlog__attachment--spoiler")
+      ) {
+        target.classList.toggle("revealed");
       }
 
-      // If clicked directly on the spoiler span
-      if (target.classList.contains("spoiler")) {
-        target.classList.toggle("revealed");
-        return;
+      if (
+        target.tagName === "IMG" &&
+        target.parentElement &&
+        (target.parentElement.classList.contains("spoiler") ||
+        target.parentElement.classList.contains("chatlog__attachment--spoiler"))
+      ) {
+        target.parentElement.classList.toggle("revealed");
       }
     });
+
   </script>
 
 
