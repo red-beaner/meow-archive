@@ -110,24 +110,18 @@
     });
 
     document.addEventListener("click", (e) => {
-      const target = e.target;
+      let target = e.target;
 
-      if (
-        target.classList.contains("spoiler") ||
-        target.classList.contains("chatlog__attachment--spoiler")
-      ) {
-        target.classList.toggle("revealed");
-      }
-
-      if (
-        target.tagName === "IMG" &&
-        target.parentElement &&
-        (target.parentElement.classList.contains("spoiler") ||
-        target.parentElement.classList.contains("chatlog__attachment--spoiler"))
-      ) {
-        target.parentElement.classList.toggle("revealed");
+      // Check if the clicked item is inside a spoiler container
+      while (target && target !== document.body) {
+        if (target.classList.contains("spoiler") || target.classList.contains("chatlog__attachment--spoiler")) {
+          target.classList.toggle("revealed");
+          break;
+        }
+        target = target.parentElement;
       }
     });
+
 
   </script>
 
