@@ -124,6 +124,15 @@
 
 
   </script>
+  <script>
+    document.addEventListener("click", (e) => {
+      const spoiler = e.target.closest(".chatlog__attachment--hidden");
+      if (spoiler) {
+        spoiler.classList.remove("chatlog__attachment--hidden");
+      }
+    });
+  </script>
+
 
 
 </body>
