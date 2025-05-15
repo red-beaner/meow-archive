@@ -12,10 +12,12 @@
       padding: 0 1rem;
       background: #f4f4f4;
     }
+
     #content {
       max-width: 800px;
       margin: auto;
     }
+
     .loading {
       text-align: center;
       font-size: 1.2em;
@@ -23,7 +25,7 @@
       color: #555;
     }
 
-    /* Handle spoiler containers (text or images) */
+    /* Generic spoiler styling */
     .spoiler,
     .chatlog__attachment--spoiler {
       position: relative;
@@ -38,21 +40,23 @@
       filter: none;
     }
 
-    /* Remove overlay applied by DiscordChatExporter */
+    /* This targets any overlay added via ::after or ::before */
+    .spoiler::after,
     .chatlog__attachment--spoiler::after {
-      content: "";
+      content: '';
       position: absolute;
       inset: 0;
-      background-color: rgba(0, 0, 0, 0.4); /* dark overlay */
+      background: rgba(0, 0, 0, 0.4);
       pointer-events: none;
       transition: opacity 0.2s ease;
     }
 
-    /* When revealed, hide that overlay */
+    .spoiler.revealed::after,
     .chatlog__attachment--spoiler.revealed::after {
       opacity: 0;
     }
   </style>
+
 </head>
 <body>
   <div id="content">
