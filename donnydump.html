@@ -41,7 +41,8 @@
       loader.textContent = `Loading part ${currentPart}...`;
 
       try {
-        const res = await fetch(`Donypart${currentPart}.html`);
+        // 👇 Change here: look in "donnydump_parts" folder
+        const res = await fetch(`donnydump_parts/Donypart${currentPart}.html`);
         if (!res.ok) {
           finished = true;
           loader.textContent = "All messages loaded.";
