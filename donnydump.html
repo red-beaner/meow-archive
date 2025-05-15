@@ -3,16 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <title>Donny Dump Archive</title>
-  <style>
-    .spoiler {
-      filter: blur(5px);
-      cursor: pointer;
-      transition: filter 0.2s ease;
-    }
-    .spoiler.revealed {
-      filter: none;
-    }
-  </style>
+
 
   <style>
     body {
@@ -30,6 +21,15 @@
       font-size: 1.2em;
       padding: 2em 0;
       color: #555;
+    }
+
+    .spoiler {
+      filter: blur(5px);
+      cursor: pointer;
+      transition: filter 0.2s ease;
+    }
+    .spoiler.revealed {
+      filter: none;
     }
   </style>
 </head>
@@ -83,16 +83,24 @@
         loadNextPart();
       }
     });
-  </script>
-  <script>
-    // Enable spoiler click-to-reveal behavior
-    document.addEventListener("click", (e) => {
-      const target = e.target;
+
+      document.addEventListener("click", (e) => {
+      let target = e.target;
+
+      // If clicked on an image inside a spoiler span
+      if (target.tagName === "IMG" && target.parentElement.classList.contains("spoiler")) {
+        target.parentElement.classList.toggle("revealed");
+        return;
+      }
+
+      // If clicked directly on the spoiler span
       if (target.classList.contains("spoiler")) {
         target.classList.toggle("revealed");
+        return;
       }
     });
   </script>
+
 
 </body>
 </html>
