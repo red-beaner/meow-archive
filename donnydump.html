@@ -23,15 +23,34 @@
       color: #555;
     }
 
-    .spoiler, .chatlog__attachment--spoiler {
+    /* Handle spoiler containers (text or images) */
+    .spoiler,
+    .chatlog__attachment--spoiler {
+      position: relative;
       filter: blur(5px);
       cursor: pointer;
       transition: filter 0.2s ease;
     }
 
+    /* Remove blur when revealed */
     .spoiler.revealed,
     .chatlog__attachment--spoiler.revealed {
       filter: none;
+    }
+
+    /* Remove overlay applied by DiscordChatExporter */
+    .chatlog__attachment--spoiler::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-color: rgba(0, 0, 0, 0.4); /* dark overlay */
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+    }
+
+    /* When revealed, hide that overlay */
+    .chatlog__attachment--spoiler.revealed::after {
+      opacity: 0;
     }
   </style>
 </head>
