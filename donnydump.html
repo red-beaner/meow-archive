@@ -65,6 +65,12 @@
 
 </head>
 <body>
+  <script>
+    if (sessionStorage.getItem("authorized") !== "true") {
+      window.location.href = "donnydump-path.html";
+    }
+  </script>
+
   <nav style="background-color: #333; padding: 1rem; color: white; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
     <div style="display: flex; gap: 1rem; align-items: center;">
       <a href="index.html" style="color: white; text-decoration: none; font-weight: bold;">Home</a>
