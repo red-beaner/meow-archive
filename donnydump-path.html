@@ -34,29 +34,21 @@
   <div id="login-box">
     <h2>Enter Password</h2>
     <input type="password" id="password" placeholder="Password">
-    <button onclick="checkPassword()">Access</button>
+    <button id="accessBtn">Access</button>
     <div class="error" id="error">Incorrect password.</div>
   </div>
 
   <script>
-    function md5(string) {
-      return crypto.subtle.digest("MD5", new TextEncoder().encode(string)).then(buf => {
-        return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, "0")).join("");
-      });
-    }
-
-    async function checkPassword() {
-      const input = document.getElementById("password").value;
-      const hash = await md5(input);
-      const correctHash = "e82c6f9d6f8cf97b1bcd60cfa098f359"; // MD5 of "democracyforever"
-
-      if (hash === correctHash) {
+    document.getElementById("accessBtn").addEventListener("click", () => {
+      const password = document.getElementById("password").value;
+      const correct = "democracyforever"; // plaintext match
+      if (password === correct) {
         sessionStorage.setItem("authorized", "true");
         window.location.href = "donnydump.html";
       } else {
         document.getElementById("error").style.display = "block";
       }
-    }
+    });
   </script>
 </body>
 </html>
