@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Donny Dump Archive</title>
+
+
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 0;
+      padding: 0 1rem;
+      background: #f4f4f4;
+    }
+
+    #content {
+      max-width: 800px;
+      margin: auto;
+    }
+
+    .loading {
+      text-align: center;
+      font-size: 1.2em;
+      padding: 2em 0;
+      color: #555;
+    }
+
+    /* Generic spoiler styling */
+    .spoiler,
+    .chatlog__attachment--spoiler {
+      position: relative;
+      filter: blur(5px);
+      cursor: pointer;
+      transition: filter 0.2s ease;
+    }
+
+    /* Remove blur when revealed */
+    .spoiler.revealed,
+    .chatlog__attachment--spoiler.revealed {
+      filter: none;
+    }
+
+    /* This targets any overlay added via ::after or ::before */
+    .spoiler::after,
+    .chatlog__attachment--spoiler::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.4);
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+    }
+
+    .spoiler.revealed::after,
+    .chatlog__attachment--spoiler.revealed::after {
+      opacity: 0;
+    }
+    nav select {
+      padding: 0.3rem;
+      border-radius: 4px;
+    }
+
+  </style>
+  
+
+</head>
+<body>
+  <nav style="background-color: #333; padding: 1rem; color: white; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+    <div style="display: flex; gap: 1rem; align-items: center;">
+      <a href="index.html" style="color: white; text-decoration: none; font-weight: bold;">Home</a>
+  
+      <label for="pageSelect" style="color: white;">Jump to:</label>
+      <select id="pageSelect" onchange="navigateToPage(this.value)">
+        <option value="">Select...</option>
+        <option value="donnydump.html">Donny Dump</option>
+        <option value="memes.html">Memes</option>
+        <option value="screenshots.html">Screenshots</option>
+        <!-- Add more pages as needed -->
+      </select>
+    </div>
+  
+    <input type="text" placeholder="Search (not functional yet)" style="padding: 0.3rem; border-radius: 4px; border: none; min-width: 200px;" disabled />
+  </nav>
+
+  <div id="content">
+    <h1>Donny Dump Archive</h1>
+    <div id="loader" class="loading">Loading messages...</div>
+  </div>
+
+  <script>
+    const content = document.getElementById("content");
+    const loader = document.getElementById("loader");
+    let currentPart = 1;
+    let loading = false;
+    let finished = false;
+
+    async function loadNextPart() {
+      if (loading || finished) return;
+      loading = true;
+      loader.textContent = `Loading part ${currentPart}...`;
+
+      try {
+        // 👇 Change here: look in "donnydump_parts" folder
+        const res = await fetch(`donnydump_parts/Donypart${currentPart}.html`);
+        if (!res.ok) {
+          finished = true;
+          loader.textContent = "All messages loaded.";
+          return;
+        }
+
+        const html = await res.text();
+        const wrapper = document.createElement("div");
+        wrapper.innerHTML = html;
+        content.insertBefore(wrapper, loader);
+
+        currentPart++;
+        loading = false;
+      } catch (err) {
+        console.error(err);
+        loader.textContent = "Error loading messages.";
+      }
+    }
+
+    // Load the first part immediately
+    loadNextPart();
+
+    // Load more parts as user scrolls
+    window.addEventListener("scroll", () => {
+      const nearBottom = window.innerHeight + window.scrollY >= document.body.offsetHeight - 200;
+      if (nearBottom) {
+        loadNextPart();
+      }
+    });
+
+    document.addEventListener("click", (e) => {
+      let target = e.target;
+
+      // Check if the clicked item is inside a spoiler container
+      while (target && target !== document.body) {
+        if (target.classList.contains("spoiler") || target.classList.contains("chatlog__attachment--spoiler")) {
+          target.classList.toggle("revealed");
+          break;
+        }
+        target = target.parentElement;
+      }
+    });
+
+
+  </script>
+  <script>
+    document.addEventListener("click", (e) => {
+      const spoiler = e.target.closest(".chatlog__attachment--hidden");
+      if (spoiler) {
+        spoiler.classList.remove("chatlog__attachment--hidden");
+      }
+    });
+  </script>
+  <script>
+    function navigateToPage(page) {
+      if (page) {
+        window.location.href = page;
+      }
+    }
+  </script>
+
+
+
+
+</body>
+</html>
