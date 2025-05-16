@@ -1,64 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>Protected Archive</title>
-  <style>
-    body {
-      font-family: sans-serif;
-      background: #f0f0f0;
-      padding: 2em;
-      text-align: center;
-    }
-    #access-area {
-      display: flex;
-      flex-direction: column;
-      gap: 1em;
-      max-width: 300px;
-      margin: 0 auto;
-    }
-    input {
-      padding: 0.5em;
-      font-size: 1em;
-    }
-    button {
-      padding: 0.5em;
-      font-size: 1em;
-      cursor: pointer;
-    }
-    #error {
-      color: red;
-      display: none;
-    }
-  </style>
-</head>
-<body>
-
-  <h1>Enter Password to View Donny Dump</h1>
-  <div id="access-area">
-    <input type="password" id="password" placeholder="Enter password" />
-    <button onclick="checkPassword()">Access</button>
-    <div id="error">Incorrect password. Try again.</div>
-  </div>
-
-  <script>
-    async function checkPassword() {
-      const input = document.getElementById("password").value;
-      const encoder = new TextEncoder();
-      const data = encoder.encode(input);
-      const hashBuffer = await crypto.subtle.digest('MD5', data);
-      const hashArray = Array.from(new Uint8Array(hashBuffer));
-      const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-
-      // Check against the hash of "democracyforever"
-      if (hashHex === "a5a46c7b59949328b80fdd0cc4ccf86b") {
-        sessionStorage.setItem("authorized", "true");
-        window.location.href = "donnydump.html";
-      } else {
-        document.getElementById("error").style.display = "block";
+  <head>
+    <meta charset="UTF-8" />
+    <title>Protected Archive</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        background: #f0f0f0;
+        padding: 2em;
+        text-align: center;
       }
-    }
-  </script>
-
-</body>
+      #access-area {
+        display: flex;
+        flex-direction: column;
+        gap: 1em;
+        max-width: 300px;
+        margin: 0 auto;
+      }
+      input {
+        padding: 0.5em;
+        font-size: 1em;
+      }
+      button {
+        padding: 0.5em;
+        font-size: 1em;
+        cursor: pointer;
+      }
+      #error {
+        color: red;
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+  
+    <h1>Enter Password to View Donny Dump</h1>
+    <div id="access-area">
+      <input type="password" id="password" placeholder="Enter password" />
+      <button onclick="checkPassword()">Access</button>
+      <div id="error">Incorrect password. Try again.</div>
+    </div>
+  
+    <script>
+      async function checkPassword() {
+        const input = document.getElementById("password").value;
+        const encoder = new TextEncoder();
+        const data = encoder.encode(input);
+        const hashBuffer = await crypto.subtle.digest("MD5", data);
+        const hashArray = Array.from(new Uint8Array(hashBuffer));
+        const hashHex = hashArray.map(b => b.toString(16).padStart(2, "0")).join("");
+  
+        // MD5 of "democracyforever"
+        if (hashHex === "a5a46c7b59949328b80fdd0cc4ccf86b") {
+          sessionStorage.setItem("authorized", "true");
+          window.location.href = "donnydump.html";
+        } else {
+          document.getElementById("error").style.display = "block";
+        }
+      }
+    </script>
+  
+  </body>
 </html>
