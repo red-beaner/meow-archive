@@ -6,101 +6,59 @@
   <style>
     body {
       font-family: sans-serif;
-      background: #f4f4f4;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-    }
-    #login {
-      background: white;
-      padding: 2rem;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      border-radius: 8px;
+      background: #f0f0f0;
+      padding: 2em;
       text-align: center;
     }
+    #access-area {
+      display: flex;
+      flex-direction: column;
+      gap: 1em;
+      max-width: 300px;
+      margin: 0 auto;
+    }
     input {
-      padding: 0.5rem;
-      width: 100%;
-      margin-top: 1rem;
+      padding: 0.5em;
+      font-size: 1em;
     }
     button {
-      margin-top: 1rem;
-      padding: 0.5rem 1rem;
+      padding: 0.5em;
+      font-size: 1em;
+      cursor: pointer;
+    }
+    #error {
+      color: red;
+      display: none;
     }
   </style>
 </head>
 <body>
-  <div id="login">
-    <h2>Enter Password</h2>
-    <input type="password" id="password" placeholder="Password" />
+
+  <h1>Enter Password to View Donny Dump</h1>
+  <div id="access-area">
+    <input type="password" id="password" placeholder="Enter password" />
     <button onclick="checkPassword()">Access</button>
-    <p id="error" style="color:red;"></p>
+    <div id="error">Incorrect password. Try again.</div>
   </div>
 
   <script>
-    // Minimal MD5 hash function (from https://github.com/blueimp/JavaScript-MD5)
-    function md5cycle(x, k) {
-      // function content omitted for brevity
-      // full library inserted below
-    }
-    function md5blk(s) {
-      var md5blks = [], i;
-      for (i = 0; i < 64; i += 4) {
-        md5blks[i >> 2] = s.charCodeAt(i)
-          + (s.charCodeAt(i + 1) << 8)
-          + (s.charCodeAt(i + 2) << 16)
-          + (s.charCodeAt(i + 3) << 24);
-      }
-      return md5blks;
-    }
-    function rhex(n) {
-      var s = '', j = 0;
-      for (; j < 4; j++)
-        s += ('0' + ((n >> (j * 8 + 4)) & 0x0F).toString(16)).slice(-2) +
-             ('0' + ((n >> (j * 8)) & 0x0F).toString(16)).slice(-2);
-      return s;
-    }
-    function hex(x) {
-      for (var i = 0; i < x.length; i++) x[i] = rhex(x[i]);
-      return x.join('');
-    }
-    function md51(s) {
-      var n = s.length,
-        state = [1732584193, -271733879, -1732584194, 271733878],
-        i;
-      for (i = 64; i <= n; i += 64) {
-        md5cycle(state, md5blk(s.substring(i - 64, i)));
-      }
-      s = s.substring(i - 64);
-      var tail = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-      for (i = 0; i < s.length; i++)
-        tail[i >> 2] |= s.charCodeAt(i) << ((i % 4) << 3);
-      tail[i >> 2] |= 0x80 << ((i % 4) << 3);
-      if (i > 55) {
-        md5cycle(state, tail);
-        for (i = 0; i < 16; i++) tail[i] = 0;
-      }
-      tail[14] = n * 8;
-      md5cycle(state, tail);
-      return state;
-    }
-    function md5(s) {
-      return hex(md51(s));
-    }
-
-    // 🔐 Check password and redirect
-    function checkPassword() {
+    async function checkPassword() {
       const input = document.getElementById("password").value;
-      const hash = md5(input);
-      const correct = "b213f7e9e4106e877f5dc2465a70fc88"; // "democracyforever"
-      if (hash === correct) {
+      const encoder = new TextEncoder();
+      const data = encoder.encode(input);
+      const hashBuffer = await crypto.subtle.digest('MD5', data);
+      const hashArray = Array.from(new Uint8Array(hashBuffer));
+      const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+
+      // Check against the hash of "democracyforever"
+      if (hashHex === "a5a46c7b59949328b80fdd0cc4ccf86b") {
+        sessionStorage.setItem("authorized", "true");
         window.location.href = "donnydump.html";
       } else {
-        document.getElementById("error").textContent = "Incorrect password.";
+        document.getElementById("error").style.display = "block";
       }
     }
   </script>
+
 </body>
 </html>
