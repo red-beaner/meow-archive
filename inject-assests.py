@@ -1,24 +1,45 @@
-from bs4 import BeautifulSoup
+import sys
 import os
-import shutil
+import re
 
-html_path = r'C:\Users\j\Documents\GitHub\meow-archive\meow-archive\index.html'
-backup_path = html_path + '.bak'
+def remove_old_ui(html_content):
+    # This pattern matches the entire <script> block that loads parts dynamically (old UI)
+    pattern = re.compile(
+        r'<script>.*?async function loadNextPart\(\).*?window\.addEventListener\("scroll",.*?</script>',
+        re.DOTALL
+    )
+    new_content, count = pattern.subn('', html_content)
+    return new_content, count > 0
 
-# Backup original first
-shutil.copyfile(html_path, backup_path)
-print(f"Backup created at {backup_path}")
+def main(folder):
+    if not os.path.isdir(folder):
+        print(f"Error: {folder} is not a valid directory.")
+        return
 
-with open(html_path, 'r', encoding='utf-8') as f:
-    soup = BeautifulSoup(f, 'html.parser')
+    html_files = [f for f in os.listdir(folder) if f.endswith('.html') and f.lower() != 'index.html']
 
-# Remove only these specific elements:
-for selector in ['.button-container', '.panel']:
-    for elem in soup.select(selector):
-        elem.decompose()
-        print(f"Removed element with selector: {selector}")
+    if not html_files:
+        print("No HTML files found (excluding index.html).")
+        return
 
-with open(html_path, 'w', encoding='utf-8') as f:
-    f.write(str(soup))
+    print(f"Processing {len(html_files)} files in '{folder}'...")
 
-print("Cleanup complete for index.html")
+    for filename in html_files:
+        filepath = os.path.join(folder, filename)
+        with open(filepath, 'r', encoding='utf-8') as f:
+            content = f.read()
+
+        new_content, changed = remove_old_ui(content)
+
+        if changed:
+            with open(filepath, 'w', encoding='utf-8') as f:
+                f.write(new_content)
+            print(f"Fixed: {filename}")
+        else:
+            print(f"No changes: {filename}")
+
+if __name__ == '__main__':
+    if len(sys.argv) != 2:
+        print("Usage: python fix_old_ui.py <folder_path>")
+    else:
+        main(sys.argv[1])
