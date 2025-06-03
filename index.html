@@ -1,310 +1,309 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta charset="utf-8" />
+<meta content="width=device-width, initial-scale=1" name="viewport" />
 <title>Meow Archive</title>
 <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: url('https://drive.diggy.network/api/public/dl/O2M3Ncbx?inline=true') no-repeat center center fixed;
-      background-size: cover;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      transition: background-color 0.5s ease, color 0.5s ease;
-    }
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: url('https://drive.diggy.network/api/public/dl/O2M3Ncbx?inline=true') no-repeat center center fixed;
+    background-size: cover;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.5s ease, color 0.5s ease;
+  }
 
-    body.no-background {
-      background: none !important;
-    }
+  body.no-background {
+    background: none !important;
+  }
 
-    body.dark-mode::before {
-      content: '';
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0, 0, 0, 0.75);
-      z-index: -1;
-    }
+  body.dark-mode::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.75);
+    z-index: -1;
+  }
 
-    .panel {
-      background-color: rgba(255, 255, 255, 0.9);
-      border-radius: 20px;
-      padding: 30px 40px;
-      width: 300px;
+  .panel {
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 20px;
+    padding: 30px 40px;
+    width: 300px;
+    box-shadow: 0 0 15px 4px #f00, 0 0 30px 8px #0077ff;
+    animation: glow 3s infinite alternate;
+    text-align: center;
+    transition: background-color 0.5s ease, color 0.5s ease;
+    z-index: 1;
+  }
+
+  body.dark-mode .panel {
+    background-color: rgba(20, 20, 20, 0.9);
+    color: white;
+  }
+
+  @keyframes glow {
+    0% {
       box-shadow: 0 0 15px 4px #f00, 0 0 30px 8px #0077ff;
-      animation: glow 3s infinite alternate;
-      text-align: center;
-      transition: background-color 0.5s ease, color 0.5s ease;
-      z-index: 1;
     }
+    50% {
+      box-shadow: 0 0 20px 6px #8b0000, 0 0 40px 12px #005fa3;
+    }
+    100% {
+      box-shadow: 0 0 15px 4px #f00, 0 0 30px 8px #0077ff;
+    }
+  }
 
-    body.dark-mode .panel {
-      background-color: rgba(20, 20, 20, 0.9);
-      color: white;
-    }
+  .animated-text {
+    animation: colorCycle 6s linear infinite;
+    font-weight: bold;
+    font-size: 24px;
+  }
 
-    @keyframes glow {
-      0% {
-        box-shadow: 0 0 15px 4px #f00, 0 0 30px 8px #0077ff;
-      }
-      50% {
-        box-shadow: 0 0 20px 6px #8b0000, 0 0 40px 12px #005fa3;
-      }
-      100% {
-        box-shadow: 0 0 15px 4px #f00, 0 0 30px 8px #0077ff;
-      }
-    }
+  @keyframes colorCycle {
+    0%, 33% { color: #d2042d; }
+    34%, 66% { color: #003e7e; }
+    67%, 100% { color: #000; }
+  }
 
-    .animated-text {
-      animation: colorCycle 6s linear infinite;
-      font-weight: bold;
-      font-size: 24px;
-    }
+  body.dark-mode .animated-text {
+    animation: colorCycleDark 6s linear infinite;
+  }
 
-    @keyframes colorCycle {
-      0%, 33% { color: #d2042d; }
-      34%, 66% { color: #003e7e; }
-      67%, 100% { color: #000; }
-    }
+  @keyframes colorCycleDark {
+    0%, 33% { color: #ff8a8a; }
+    34%, 66% { color: #66aaff; }
+    67%, 100% { color: #fff; }
+  }
 
-    body.dark-mode .animated-text {
-      animation: colorCycleDark 6s linear infinite;
-    }
+  h1, h3, h7 {
+    margin: 0 0 15px 0;
+  }
 
-    @keyframes colorCycleDark {
-      0%, 33% { color: #ff8a8a; }
-      34%, 66% { color: #66aaff; }
-      67%, 100% { color: #fff; }
-    }
+  h7 {
+    font-size: 12px;
+    color: #555;
+  }
 
-    h1, h3, h7 {
-      margin: 0 0 15px 0;
-    }
+  body.dark-mode h7 {
+    color: #ccc;
+  }
 
-    h7 {
-      font-size: 12px;
-      color: #555;
-    }
+  .button-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    gap: 10px;
+    z-index: 1100;
+  }
 
-    body.dark-mode h7 {
-      color: #ccc;
-    }
+  button {
+    padding: 10px 18px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 8px;
+    border: none;
+    font-weight: bold;
+    background-color: white;
+    color: black;
+    transition: background-color 0.3s, color 0.3s;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  }
 
-    .button-container {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      display: flex;
-      gap: 10px;
-      z-index: 1100;
-    }
+  button:hover {
+    background-color: #ddd;
+  }
 
-    button {
-      padding: 10px 18px;
-      font-size: 16px;
-      cursor: pointer;
-      border-radius: 8px;
-      border: none;
-      font-weight: bold;
-      background-color: white;
-      color: black;
-      transition: background-color 0.3s, color 0.3s;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-    }
+  body.dark-mode button {
+    background-color: #555;
+    color: white;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.7);
+  }
 
-    button:hover {
-      background-color: #ddd;
-    }
+  body.dark-mode button:hover {
+    background-color: #777;
+  }
 
-    body.dark-mode button {
-      background-color: #555;
-      color: white;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.7);
-    }
+  a {
+    color: #003e7e;
+    text-decoration: none;
+    font-weight: bold;
+  }
 
-    body.dark-mode button:hover {
-      background-color: #777;
-    }
+  a:hover {
+    text-decoration: underline;
+  }
 
-    a {
-      color: #003e7e;
-      text-decoration: none;
-      font-weight: bold;
-    }
+  body.dark-mode a {
+    color: #66aaff;
+  }
 
-    a:hover {
-      text-decoration: underline;
-    }
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0 0 0;
+    text-align: left;
+  }
 
-    body.dark-mode a {
-      color: #66aaff;
-    }
+  li {
+    margin: 10px 0;
+  }
 
-    ul {
-      list-style: none;
-      padding: 0;
-      margin: 20px 0 0 0;
-      text-align: left;
-    }
+  .dropdown {
+    position: relative;
+  }
 
-    li {
-      margin: 10px 0;
-    }
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    left: 0;
+    background-color: white;
+    min-width: 200px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    z-index: 10;
+    padding: 10px;
+  }
 
-    .dropdown {
-      position: relative;
-    }
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
 
-    .dropdown-content {
-      display: none;
-      position: absolute;
-      left: 0;
-      background-color: white;
-      min-width: 200px;
-      border: 1px solid #ccc;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      z-index: 10;
-      padding: 10px;
-    }
+  body.dark-mode .dropdown-content {
+    background-color: #333;
+    border-color: #666;
+  }
 
-    .dropdown:hover .dropdown-content {
-      display: block;
-    }
+  .dropdown-content a {
+    display: block;
+    padding: 5px 0;
+  }
 
-    body.dark-mode .dropdown-content {
-      background-color: #333;
-      border-color: #666;
-    }
+  body.dark-mode .dropdown-content a {
+    color: #ccc;
+  }
 
-    .dropdown-content a {
-      display: block;
-      padding: 5px 0;
-    }
+  /* Modal styles */
+  .modal {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.7);
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+  }
 
-    body.dark-mode .dropdown-content a {
-      color: #ccc;
-    }
+  .modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 300px;
+    text-align: center;
+  }
 
-    /* Modal styles */
-    .modal {
-      display: none;
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0,0,0,0.7);
-      justify-content: center;
-      align-items: center;
-      z-index: 2000;
-    }
+  body.dark-mode .modal-content {
+    background-color: #222;
+    color: white;
+  }
 
-    .modal-content {
-      background-color: white;
-      padding: 20px;
-      border-radius: 10px;
-      width: 300px;
-      text-align: center;
-    }
+  .modal-content h2 {
+    margin-top: 0;
+  }
 
-    body.dark-mode .modal-content {
-      background-color: #222;
-      color: white;
-    }
+  .close {
+    margin-top: 15px;
+    cursor: pointer;
+    font-weight: bold;
+    color: #f00;
+  }
 
-    .modal-content h2 {
-      margin-top: 0;
-    }
+  /* === New styles for Welcome Screen === */
+  #welcomeScreen {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(255, 255, 255, 0.95);
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+    box-sizing: border-box;
+    z-index: 3000;
+    opacity: 1;
+    transition: opacity 0.5s ease;
+  }
 
-    .close {
-      margin-top: 15px;
-      cursor: pointer;
-      font-weight: bold;
-      color: #f00;
-    }
+  body.dark-mode #welcomeScreen {
+    background: rgba(20, 20, 20, 0.95);
+    color: white;
+  }
 
-    /* === New styles for Welcome Screen === */
-    #welcomeScreen {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: rgba(255, 255, 255, 0.95);
-      color: black;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 30px;
-      box-sizing: border-box;
-      z-index: 3000;
-      opacity: 1;
-      transition: opacity 0.5s ease;
-    }
+  #welcomeContent {
+    max-width: 400px;
+    text-align: center;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    background-color: inherit;
+  }
 
-    body.dark-mode #welcomeScreen {
-      background: rgba(20, 20, 20, 0.95);
-      color: white;
-    }
+  #welcomeContent h2 {
+    margin-top: 0;
+  }
 
-    #welcomeContent {
-      max-width: 400px;
-      text-align: center;
-      border-radius: 15px;
-      padding: 20px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.2);
-      background-color: inherit;
-    }
+  #welcomeContent p {
+    margin: 20px 0;
+    font-size: 16px;
+    line-height: 1.4;
+  }
 
-    #welcomeContent h2 {
-      margin-top: 0;
-    }
+  #welcomeCloseBtn {
+    margin-top: 20px;
+    padding: 10px 24px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    background-color: #0077ff;
+    color: white;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    transition: background-color 0.3s ease;
+  }
 
-    #welcomeContent p {
-      margin: 20px 0;
-      font-size: 16px;
-      line-height: 1.4;
-    }
+  #welcomeCloseBtn:hover {
+    background-color: #005fa3;
+  }
 
-    #welcomeCloseBtn {
-      margin-top: 20px;
-      padding: 10px 24px;
-      font-size: 16px;
-      font-weight: bold;
-      border-radius: 10px;
-      border: none;
-      cursor: pointer;
-      background-color: #0077ff;
-      color: white;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-      transition: background-color 0.3s ease;
-    }
+  body.dark-mode #welcomeCloseBtn {
+    background-color: #3399ff;
+    color: #222;
+  }
 
-    #welcomeCloseBtn:hover {
-      background-color: #005fa3;
-    }
+  body.dark-mode #welcomeCloseBtn:hover {
+    background-color: #1a75ff;
+    color: white;
+  }
 
-    body.dark-mode #welcomeCloseBtn {
-      background-color: #3399ff;
-      color: #222;
-    }
-
-    body.dark-mode #welcomeCloseBtn:hover {
-      background-color: #1a75ff;
-      color: white;
-    }
-
-    /* Fade out effect */
-    #welcomeScreen.fade-out {
-      opacity: 0;
-      pointer-events: none;
-    }
-  </style>
-<link href="styles/inject-style.css" rel="stylesheet"/>
+  /* Fade out effect */
+  #welcomeScreen.fade-out {
+    opacity: 0;
+    pointer-events: none;
+  }
+</style>
+<link href="styles/inject-style.css" rel="stylesheet" />
 <style>
   body {
     background: url('https://drive.diggy.network/api/public/dl/HztOunHx?inline=true') no-repeat center center fixed !important;
@@ -315,52 +314,74 @@
   #page-wrapper {
     max-width: 960px;
     margin: 40px auto;
-    padding: 20px;
-    background: rgba(255, 255, 255, 0.8);
-    border-radius: 12px;
-    box-shadow: 0 0 15px rgba(0,0,0,0.2);
-  }
-
-  body.dark-mode #page-wrapper {
-    background: rgba(30, 30, 30, 0.85);
-    color: white;
   }
 </style>
 </head>
 <body>
-
-<div class="modal" id="settingsModal">
-<div class="modal-content">
-<h2>Settings</h2>
-<label><input id="darkModeToggle" type="checkbox"/> Dark Mode</label><br/>
-<label><input id="noBackgroundToggle" type="checkbox"/> Remove Background</label><br/>
-<button id="settingsCloseBtn">Close</button>
-</div>
-</div>
-<div class="modal" id="contactModal">
-<div class="modal-content">
-<h2>Contact</h2>
-<p>Email: meowarchive@example.com</p>
-<button id="contactCloseBtn">Close</button>
-</div>
-</div>
-<div class="modal" id="updateModal">
-<div class="modal-content">
-<h2>Update Notes</h2>
-<p>Version 25.0603 includes the new welcome screen, improved dark mode, and updated navigation.</p>
-<button id="updateCloseBtn">Close</button>
-</div>
-</div>
-<div id="page-wrapper"><!-- Welcome Screen --><div aria-describedby="welcomeDesc" aria-labelledby="welcomeTitle" aria-modal="true" id="welcomeScreen" role="dialog">
-<div id="welcomeContent">
-<h2 id="welcomeTitle">Welcome to Meow Archive!</h2>
-<p id="welcomeDesc">
+<div id="page-wrapper">
+  <!-- Welcome Screen -->
+  <div id="welcomeScreen" role="dialog" aria-modal="true" aria-labelledby="welcomeTitle" aria-describedby="welcomeDesc">
+    <div id="welcomeContent">
+      <h2 id="welcomeTitle">Welcome to Meow Archive!</h2>
+      <p id="welcomeDesc">
         This archive is your gateway to a wide collection of curated content, including quotes, memes, positivity, art, and more.<br/><br/>
         Use the navigation links to explore different sections. Don't hesitate to use the Settings button to toggle dark mode or background options.<br/><br/>
         Enjoy your visit!
       </p>
-<button aria-label="Close welcome screen" id="welcomeCloseBtn">Close</button>
+      <button id="welcomeCloseBtn" aria-label="Close welcome screen">Close</button>
+    </div>
+  </div>
+
+  <!-- Main Panel -->
+  <div class="panel" role="region" aria-label="Main archive menu">
+    <h1 class="animated-text">Meow Archive</h1>
+    <h3>Welcome to the catty side of the internet!</h3>
+    <h7>Curated with ❤️ by the Meow Team</h7>
+
+    <ul>
+      <li><a href="archive/smile.html" tabindex="0">Smile Quotations</a></li>
+      <li><a href="archive/purr.html" tabindex="0">Purr &amp; Positivity</a></li>
+      <li><a href="archive/art.html" tabindex="0">Feline Art</a></li>
+      <li><a href="archive/memes.html" tabindex="0">Cat Memes</a></li>
+      <li><a href="archive/archives.html" tabindex="0">More Archives</a></li>
+    </ul>
+  </div>
 </div>
-</div><!-- Settings Modal --><!-- Contact Modal --><!-- Update Notes Modal --><script defer="True" src="scripts/inject-button-bar.js"></script></div><script defer="" src="scripts/inject-button-bar.js"></script>
+
+<!-- Button container fixed on bottom right -->
+<div class="button-container" aria-label="Global controls">
+  <button id="darkToggle" aria-pressed="false" aria-label="Toggle dark mode">Dark Mode</button>
+  <button id="bgToggle" aria-pressed="true" aria-label="Toggle background image">Background</button>
+  <button id="openSettings" aria-haspopup="dialog" aria-controls="settingsModal">Settings</button>
+</div>
+
+<!-- Settings Modal -->
+<div id="settingsModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="settingsTitle" aria-describedby="settingsDesc" tabindex="-1">
+  <div class="modal-content">
+    <h2 id="settingsTitle">Settings</h2>
+    <p id="settingsDesc">Toggle display options:</p>
+    <button id="closeSettings" class="close" aria-label="Close settings modal">Close</button>
+  </div>
+</div>
+
+<script src="scripts/panel.js"></script>
+
+<!-- Welcome screen close button script -->
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const welcomeScreen = document.getElementById('welcomeScreen');
+    const welcomeCloseBtn = document.getElementById('welcomeCloseBtn');
+
+    if (welcomeCloseBtn && welcomeScreen) {
+      welcomeCloseBtn.addEventListener('click', () => {
+        welcomeScreen.classList.add('fade-out');
+        setTimeout(() => {
+          welcomeScreen.style.display = 'none';
+        }, 500);
+      });
+    }
+  });
+</script>
+
 </body>
 </html>

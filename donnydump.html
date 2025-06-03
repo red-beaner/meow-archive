@@ -6,6 +6,213 @@
 <meta charset="utf-8"/>
 <title>Donny Dump Archive</title>
 <script>
+    if (sessionStorage.getItem("authorized") !== "true") {
+      window.location.href = "donnydump-path.html";
+    }
+  </script>
+<style>
+    body {
+      font-family: sans-serif;
+      margin: 0;
+      padding: 0 1rem;
+      background: #f4f4f4;
+    }
+
+    #content {
+      max-width: 800px;
+      margin: auto;
+    }
+
+    .loading {
+      text-align: center;
+      font-size: 1.2em;
+      padding: 2em 0;
+      color: #555;
+    }
+
+    /* Generic spoiler styling */
+    .spoiler,
+    .chatlog__attachment--spoiler {
+      position: relative;
+      filter: blur(5px);
+      cursor: pointer;
+      transition: filter 0.2s ease;
+    }
+
+    /* Remove blur when revealed */
+    .spoiler.revealed,
+    .chatlog__attachment--spoiler.revealed {
+      filter: none;
+    }
+
+    /* This targets any overlay added via ::after or ::before */
+    .spoiler::after,
+    .chatlog__attachment--spoiler::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.4);
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+    }
+
+    .spoiler.revealed::after,
+    .chatlog__attachment--spoiler.revealed::after {
+      opacity: 0;
+    }
+    nav select {
+      padding: 0.3rem;
+      border-radius: 4px;
+    }
+
+  </style>
+<link rel="stylesheet" href="styles/inject-style.css">
+<style>
+  body {
+    background: url('https://drive.diggy.network/api/public/dl/HztOunHx?inline=true') no-repeat center center fixed !important;
+    background-size: cover !important;
+    margin: 0; padding: 0;
+  }
+
+  #page-wrapper {
+    max-width: 960px;
+    margin: 40px auto;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  }
+
+  body.dark-mode #page-wrapper {
+    background: rgba(30, 30, 30, 0.85);
+    color: white;
+  }
+</style>
+</head>
+<body>
+<div class="button-container">
+<button id="contactBtn">Contact</button>
+<button id="settingsBtn">Settings</button>
+<button id="updateBtn">Update Notes</button>
+</div>
+
+<div class="modal" id="settingsModal">
+<div class="modal-content">
+<h2>Settings</h2>
+<label><input id="darkModeToggle" type="checkbox"/> Dark Mode</label><br/>
+<label><input id="noBackgroundToggle" type="checkbox"/> Remove Background</label><br/>
+<button id="settingsCloseBtn">Close</button>
+</div>
+</div>
+
+<div class="modal" id="contactModal">
+<div class="modal-content">
+<h2>Contact</h2>
+<p>Email: meowarchive@example.com</p>
+<button id="contactCloseBtn">Close</button>
+</div>
+</div>
+
+<div class="modal" id="updateModal">
+<div class="modal-content">
+<h2>Update Notes</h2>
+<p>Version 25.0603 includes the new welcome screen, improved dark mode, and updated navigation.</p>
+<button id="updateCloseBtn">Close</button>
+</div>
+</div>
+
+
+
+
+
+
+
+
+<div id="page-wrapper"><!-- Settings Modal --><!-- Contact Modal --><!-- Update Notes Modal --><div id="button-bar-placeholder"></div><nav style="background-color: #333; padding: 1rem; color: white; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+<div style="display: flex; gap: 1rem; align-items: center;">
+<a href="index.html" style="color: white; text-decoration: none; font-weight: bold;">Home</a>
+<label for="pageSelect" style="color: white;">Jump to:</label>
+<select id="pageSelect" onchange="navigateToPage(this.value)">
+<option value="">Select...</option>
+<option value="donnydump-path.html">Donny Dump</option>
+<option value="memes.html">Memes</option>
+<option value="caughtin4k.html">Caught in 4k</option>
+<option value="dream.html">Dream Journal</option>
+<option value="onewordstory.html">One Word Story</option>
+<option value="xscream2.html">xscream2</option>
+<option value="kitastare.html">Kita Stare</option>
+<!-- <option value="screenshots.html">Screenshots</option>
+        <option value="screenshots.html">Screenshots</option>
+        <option value="screenshots.html">Screenshots</option>
+        <option value="screenshots.html">Screenshots</option>
+        <option value="screenshots.html">Screenshots</option>
+        <!-- Add more pages as needed -->
+</select>
+</div>
+<input disabled="" placeholder="Search (not functional yet)" style="padding: 0.3rem; border-radius: 4px; border: none; min-width: 200px;" type="text"/>
+</nav><div id="content">
+<h1>Donny Dump Archive</h1>
+<div class="loading" id="loader">Loading messages...</div>
+</div><script>
+    const content = document.getElementById("content");
+    const loader = document.getElementById("loader");
+    let currentPart = 1;
+    let loading = false;
+    let finished = false;
+
+    async function loadNextPart() {
+      if (loading || finished) return;
+      loading = true;
+      loader.textContent = `Loading part ${currentPart}...`;
+
+      try {
+        // 👇 Change here: look in "donnydump_parts" folder
+        const res = await fetch(`donnydump_parts/Donypart${currentPart}.html`);
+        if (!res.ok) {
+          finished = true;
+          loader.textContent = "All messages loaded.";
+          return;
+        }
+
+        const html = await res.text();
+        const wrapper = document.createElement("div");
+        wrapper.innerHTML = html;
+        content.insertBefore(wrapper, loader);
+
+        currentPart++;
+        loading = false;
+      } catch (err) {
+        console.error(err);
+        loader.textContent = "Error loading messages.";
+      }
+    }
+
+    // Load the first part immediately
+    loadNextPart();
+
+    // Load more parts as user scrolls
+    window.addEventListener("scroll", () => {
+      const nearBottom = window.innerHeight + window.scrollY >= document.body.offsetHeight - 200;
+      if (nearBottom) {
+        loadNextPart();
+      }
+    });
+
+    document.addEventListener("click", (e) => {
+      let target = e.target;
+
+      // Check if the clicked item is inside a spoiler container
+      while (target && target !== document.body) {
+        if (target.classList.contains("spoiler") || target.classList.contains("chatlog__attachment--spoiler")) {
+          target.classList.toggle("revealed");
+          break;
+        }
+        target = target.parentElement;
+      }
+    });
+
+
+  </script><script>
     document.addEventListener("click", (e) => {
       const spoiler = e.target.closest(".chatlog__attachment--hidden");
       if (spoiler) {
