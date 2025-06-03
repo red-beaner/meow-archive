@@ -1,0 +1,62 @@
+<!-- Buttons container -->
+<div class="buttons">
+  <button onclick="openSettings()">⚙️</button>
+  <button onclick="openContact()">📞</button>
+  <button onclick="openUpdate()">📝</button>
+</div>
+
+<!-- Modals -->
+<div id="settingsModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeSettings()">&times;</span>
+    <h2>Settings</h2>
+    <label><input type="checkbox" id="darkModeToggle"> Dark Mode</label>
+  </div>
+</div>
+
+<div id="contactModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeContact()">&times;</span>
+    <h2>Contact</h2>
+    <p>Contact us at dony@dony.network</p>
+  </div>
+</div>
+
+<div id="updateModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeUpdate()">&times;</span>
+    <h2>Update Notes</h2>
+    <p>Latest updates will be shown here.</p>
+  </div>
+</div>
+
+<!-- Shared Script -->
+<script>
+  const body = document.body;
+  const toggle = document.getElementById('darkModeToggle');
+
+  const modals = {
+    settings: document.getElementById("settingsModal"),
+    contact: document.getElementById("contactModal"),
+    update: document.getElementById("updateModal"),
+  };
+
+  window.openSettings = () => modals.settings.style.display = "block";
+  window.closeSettings = () => modals.settings.style.display = "none";
+  window.openContact = () => modals.contact.style.display = "block";
+  window.closeContact = () => modals.contact.style.display = "none";
+  window.openUpdate = () => modals.update.style.display = "block";
+  window.closeUpdate = () => modals.update.style.display = "none";
+
+  if (toggle) {
+    toggle.addEventListener('change', () => {
+      body.classList.toggle('dark-mode', toggle.checked);
+    });
+  }
+
+  window.onclick = (event) => {
+    Object.values(modals).forEach(modal => {
+      if (event.target === modal) modal.style.display = "none";
+    });
+  };
+</script>

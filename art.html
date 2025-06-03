@@ -117,5 +117,135 @@
   </script>
 
 
+
+  <!-- START SHARED CONTENT -->
+  <div class="button-container">
+    <button id="contactBtn" title="Contact">Contact</button>
+    <button id="settingsBtn" title="Settings">Settings</button>
+    <button id="updateBtn" title="Update Notes">Update Notes</button>
+  </div>
+
+  <!-- Contact Modal -->
+  <div id="contactModal" class="modal-overlay" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="modal-content" id="contactModalContent">
+      <span class="modal-close" tabindex="0" aria-label="Close contact modal">&times;</span>
+      <h2>Contact Info</h2>
+      <p><strong>Discord:</strong> redbeans._.</p>
+      <p><strong>Server:</strong> <a href="https://discord.gg/N7ypkN85Rk" target="_blank" rel="noopener">Join here</a></p>
+      <p><strong>Email:</strong> email added in the future</p>
+      <p><strong>Other:</strong> Found a bug? Suggest something? Let me know!</p>
+    </div>
+  </div>
+
+  <!-- Settings Modal -->
+  <div id="settingsModal" class="modal-overlay" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="modal-content" id="settingsModalContent">
+      <span class="modal-close" tabindex="0" aria-label="Close settings modal">&times;</span>
+      <h2>Settings</h2>
+      <label for="darkModeToggle">Dark Mode
+        <label class="switch">
+          <input type="checkbox" id="darkModeToggle" />
+          <span class="slider"></span>
+        </label>
+      </label>
+    </div>
+  </div>
+
+  <!-- Update Notes Modal -->
+  <div id="updateModal" class="modal-overlay" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="modal-content" id="updateModalContent">
+      <span class="modal-close" tabindex="0" aria-label="Close update notes modal">&times;</span>
+      <h2>Update Notes</h2>
+      <p id="updateNotesText">- Version 25.0603:<br>- Added contact, settings, and update notes modals.<br>- Added dark mode toggle with persistence.<br>- Glowing border and animated text colors on main panel.<br>- Fixed Welcome Page Disapearing Instantly</p>
+    </div>
+  </div>
+
+  <script>
+    // Check if already initialized to avoid duplicate event listeners
+    if (!window.__sharedUIInitialized) {
+      window.__sharedUIInitialized = true;
+
+      // Elements
+      const contactBtn = document.getElementById('contactBtn');
+      const contactModal = document.getElementById('contactModal');
+      const contactClose = contactModal.querySelector('.modal-close');
+
+      const settingsBtn = document.getElementById('settingsBtn');
+      const settingsModal = document.getElementById('settingsModal');
+      const settingsClose = settingsModal.querySelector('.modal-close');
+      const darkModeToggle = document.getElementById('darkModeToggle');
+
+      const updateBtn = document.getElementById('updateBtn');
+      const updateModal = document.getElementById('updateModal');
+      const updateClose = updateModal.querySelector('.modal-close');
+
+      // Close modal function
+      function closeModal(modal) {
+        modal.style.display = 'none';
+        modal.setAttribute('aria-hidden', 'true');
+      }
+
+      // Open modal function
+      function openModal(modal) {
+        modal.style.display = 'flex';
+        modal.setAttribute('aria-hidden', 'false');
+      }
+
+      // Contact modal handlers
+      contactBtn.addEventListener('click', () => openModal(contactModal));
+      contactClose.addEventListener('click', () => closeModal(contactModal));
+      contactModal.addEventListener('click', (e) => {
+        if(e.target === contactModal) closeModal(contactModal);
+      });
+
+      // Settings modal handlers
+      settingsBtn.addEventListener('click', () => openModal(settingsModal));
+      settingsClose.addEventListener('click', () => closeModal(settingsModal));
+      settingsModal.addEventListener('click', (e) => {
+        if(e.target === settingsModal) closeModal(settingsModal);
+      });
+
+      // Dark mode toggle
+      darkModeToggle.addEventListener('change', () => {
+        if(darkModeToggle.checked) {
+          document.body.classList.add('dark-mode');
+          localStorage.setItem('darkMode', 'true');
+        } else {
+          document.body.classList.remove('dark-mode');
+          localStorage.setItem('darkMode', 'false');
+        }
+      });
+
+      // Restore dark mode on load
+      window.addEventListener('load', () => {
+        if(localStorage.getItem('darkMode') === 'true') {
+          document.body.classList.add('dark-mode');
+          darkModeToggle.checked = true;
+        }
+      });
+
+      // Update notes modal handlers
+      updateBtn.addEventListener('click', () => openModal(updateModal));
+      updateClose.addEventListener('click', () => closeModal(updateModal));
+      updateModal.addEventListener('click', (e) => {
+        if(e.target === updateModal) closeModal(updateModal);
+      });
+    }
+  </script>
+  <!-- END SHARED CONTENT -->
+
+<!-- START SHARED UI -->
+<div class="button-container">
+  <button id="contactBtn" title="Contact">Contact</button>
+  <button id="settingsBtn" title="Settings">Settings</button>
+  <button id="updateBtn" title="Update Notes">Update Notes</button>
+</div>
+
+<script>
+  // Your modal open/close and dark mode toggle JS here
+  // You can keep your existing JS from index.html, or reference an external shared JS file
+</script>
+<!-- END SHARED UI -->
+
 </body>
 </html>
