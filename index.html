@@ -17,6 +17,10 @@
       transition: background-color 0.5s ease, color 0.5s ease;
     }
 
+    body.no-background {
+      background: none !important;
+    }
+
     body.dark-mode::before {
       content: '';
       position: fixed;
@@ -125,7 +129,6 @@
       background-color: #777;
     }
 
-    /* Links */
     a {
       color: #003e7e;
       text-decoration: none;
@@ -140,7 +143,6 @@
       color: #66aaff;
     }
 
-    /* List styles */
     ul {
       list-style: none;
       padding: 0;
@@ -152,7 +154,6 @@
       margin: 10px 0;
     }
 
-    /* Dropdown */
     .dropdown {
       position: relative;
     }
@@ -186,6 +187,43 @@
 
     body.dark-mode .dropdown-content a {
       color: #ccc;
+    }
+
+    /* Modal styles */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.7);
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+    }
+
+    .modal-content {
+      background-color: white;
+      padding: 20px;
+      border-radius: 10px;
+      width: 300px;
+      text-align: center;
+    }
+
+    body.dark-mode .modal-content {
+      background-color: #222;
+      color: white;
+    }
+
+    .modal-content h2 {
+      margin-top: 0;
+    }
+
+    .close {
+      margin-top: 15px;
+      cursor: pointer;
+      font-weight: bold;
+      color: #f00;
     }
   </style>
 </head>
@@ -225,17 +263,78 @@
     </ul>
   </div>
 
+  <!-- Settings Modal -->
+  <div id="settingsModal" class="modal">
+    <div class="modal-content">
+      <h2>Settings</h2>
+      <label><input type="checkbox" id="darkModeToggle" /> Dark Mode</label><br><br>
+      <label><input type="checkbox" id="bgToggle" /> Background Enabled</label>
+      <div class="close" onclick="closeModal('settingsModal')">Close</div>
+    </div>
+  </div>
+
+  <!-- Contact Modal -->
+  <div id="contactModal" class="modal">
+    <div class="modal-content">
+      <h2>Contact</h2>
+      <p>Email: meow@example.com<br>Discord: Meow#1234</p>
+      <div class="close" onclick="closeModal('contactModal')">Close</div>
+    </div>
+  </div>
+
+  <!-- Patch Notes Modal -->
+  <div id="updateModal" class="modal">
+    <div class="modal-content">
+      <h2>Patch Notes</h2>
+      <p>v25.0603<br>• Dark mode fully supported<br>• Settings modal added<br>• Background toggle available</p>
+      <div class="close" onclick="closeModal('updateModal')">Close</div>
+    </div>
+  </div>
+
   <script>
     const darkModeKey = 'darkMode';
-    const darkModeButton = document.getElementById('settingsBtn');
+    const bgKey = 'backgroundEnabled';
 
-    darkModeButton.addEventListener('click', () => {
-      const enabled = document.body.classList.toggle('dark-mode');
-      localStorage.setItem(darkModeKey, enabled ? 'true' : 'false');
+    // Event listeners for modals
+    document.getElementById('settingsBtn').onclick = () => {
+      document.getElementById('settingsModal').style.display = 'flex';
+    };
+    document.getElementById('contactBtn').onclick = () => {
+      document.getElementById('contactModal').style.display = 'flex';
+    };
+    document.getElementById('updateBtn').onclick = () => {
+      document.getElementById('updateModal').style.display = 'flex';
+    };
+
+    function closeModal(id) {
+      document.getElementById(id).style.display = 'none';
+    }
+
+    // Toggle switches
+    const darkToggle = document.getElementById('darkModeToggle');
+    const bgToggle = document.getElementById('bgToggle');
+
+    darkToggle.addEventListener('change', () => {
+      document.body.classList.toggle('dark-mode', darkToggle.checked);
+      localStorage.setItem(darkModeKey, darkToggle.checked ? 'true' : 'false');
     });
 
+    bgToggle.addEventListener('change', () => {
+      document.body.classList.toggle('no-background', !bgToggle.checked);
+      localStorage.setItem(bgKey, bgToggle.checked ? 'true' : 'false');
+    });
+
+    // On page load
     if (localStorage.getItem(darkModeKey) === 'true') {
       document.body.classList.add('dark-mode');
+      darkToggle.checked = true;
+    }
+
+    if (localStorage.getItem(bgKey) === 'false') {
+      document.body.classList.add('no-background');
+      bgToggle.checked = false;
+    } else {
+      bgToggle.checked = true;
     }
   </script>
 </body>
