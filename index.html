@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<meta content="width=device-width, initial-scale=1" name="viewport" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Meow Archive</title>
 <style>
   body {
@@ -16,11 +16,9 @@
     align-items: center;
     transition: background-color 0.5s ease, color 0.5s ease;
   }
-
   body.no-background {
     background: none !important;
   }
-
   body.dark-mode::before {
     content: '';
     position: fixed;
@@ -29,24 +27,21 @@
     background: rgba(0, 0, 0, 0.75);
     z-index: -1;
   }
-
   .panel {
     background-color: rgba(255, 255, 255, 0.9);
     border-radius: 20px;
     padding: 30px 40px;
-    width: 300px;
+    width: 320px;
     box-shadow: 0 0 15px 4px #f00, 0 0 30px 8px #0077ff;
     animation: glow 3s infinite alternate;
     text-align: center;
     transition: background-color 0.5s ease, color 0.5s ease;
     z-index: 1;
   }
-
   body.dark-mode .panel {
     background-color: rgba(20, 20, 20, 0.9);
     color: white;
   }
-
   @keyframes glow {
     0% {
       box-shadow: 0 0 15px 4px #f00, 0 0 30px 8px #0077ff;
@@ -58,107 +53,57 @@
       box-shadow: 0 0 15px 4px #f00, 0 0 30px 8px #0077ff;
     }
   }
-
   .animated-text {
     animation: colorCycle 6s linear infinite;
     font-weight: bold;
     font-size: 24px;
   }
-
   @keyframes colorCycle {
     0%, 33% { color: #d2042d; }
     34%, 66% { color: #003e7e; }
     67%, 100% { color: #000; }
   }
-
   body.dark-mode .animated-text {
     animation: colorCycleDark 6s linear infinite;
   }
-
   @keyframes colorCycleDark {
     0%, 33% { color: #ff8a8a; }
     34%, 66% { color: #66aaff; }
     67%, 100% { color: #fff; }
   }
-
   h1, h3, h7 {
     margin: 0 0 15px 0;
   }
-
   h7 {
     font-size: 12px;
     color: #555;
   }
-
   body.dark-mode h7 {
     color: #ccc;
   }
-
-  .button-container {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    display: flex;
-    gap: 10px;
-    z-index: 1100;
-  }
-
-  button {
-    padding: 10px 18px;
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 8px;
-    border: none;
-    font-weight: bold;
-    background-color: white;
-    color: black;
-    transition: background-color 0.3s, color 0.3s;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-  }
-
-  button:hover {
-    background-color: #ddd;
-  }
-
-  body.dark-mode button {
-    background-color: #555;
-    color: white;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.7);
-  }
-
-  body.dark-mode button:hover {
-    background-color: #777;
-  }
-
-  a {
-    color: #003e7e;
-    text-decoration: none;
-    font-weight: bold;
-  }
-
-  a:hover {
-    text-decoration: underline;
-  }
-
-  body.dark-mode a {
-    color: #66aaff;
-  }
-
   ul {
     list-style: none;
     padding: 0;
     margin: 20px 0 0 0;
     text-align: left;
   }
-
   li {
     margin: 10px 0;
   }
-
+  a {
+    color: #003e7e;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+  body.dark-mode a {
+    color: #66aaff;
+  }
   .dropdown {
     position: relative;
   }
-
   .dropdown-content {
     display: none;
     position: absolute;
@@ -171,25 +116,52 @@
     z-index: 10;
     padding: 10px;
   }
-
   .dropdown:hover .dropdown-content {
     display: block;
   }
-
   body.dark-mode .dropdown-content {
     background-color: #333;
     border-color: #666;
   }
-
   .dropdown-content a {
     display: block;
     padding: 5px 0;
   }
-
   body.dark-mode .dropdown-content a {
     color: #ccc;
   }
-
+  /* Button container fixed on bottom right */
+  .button-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    gap: 10px;
+    z-index: 1100;
+  }
+  button {
+    padding: 10px 18px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 8px;
+    border: none;
+    font-weight: bold;
+    background-color: white;
+    color: black;
+    transition: background-color 0.3s, color 0.3s;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  }
+  button:hover {
+    background-color: #ddd;
+  }
+  body.dark-mode button {
+    background-color: #555;
+    color: white;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.7);
+  }
+  body.dark-mode button:hover {
+    background-color: #777;
+  }
   /* Modal styles */
   .modal {
     display: none;
@@ -202,7 +174,6 @@
     align-items: center;
     z-index: 2000;
   }
-
   .modal-content {
     background-color: white;
     padding: 20px;
@@ -210,24 +181,20 @@
     width: 300px;
     text-align: center;
   }
-
   body.dark-mode .modal-content {
     background-color: #222;
     color: white;
   }
-
   .modal-content h2 {
     margin-top: 0;
   }
-
   .close {
     margin-top: 15px;
     cursor: pointer;
     font-weight: bold;
     color: #f00;
   }
-
-  /* === New styles for Welcome Screen === */
+  /* Welcome screen */
   #welcomeScreen {
     position: fixed;
     top: 0; left: 0;
@@ -244,12 +211,10 @@
     opacity: 1;
     transition: opacity 0.5s ease;
   }
-
   body.dark-mode #welcomeScreen {
     background: rgba(20, 20, 20, 0.95);
     color: white;
   }
-
   #welcomeContent {
     max-width: 400px;
     text-align: center;
@@ -258,17 +223,14 @@
     box-shadow: 0 0 15px rgba(0,0,0,0.2);
     background-color: inherit;
   }
-
   #welcomeContent h2 {
     margin-top: 0;
   }
-
   #welcomeContent p {
     margin: 20px 0;
     font-size: 16px;
     line-height: 1.4;
   }
-
   #welcomeCloseBtn {
     margin-top: 20px;
     padding: 10px 24px;
@@ -282,106 +244,129 @@
     box-shadow: 0 2px 6px rgba(0,0,0,0.3);
     transition: background-color 0.3s ease;
   }
-
   #welcomeCloseBtn:hover {
     background-color: #005fa3;
   }
-
   body.dark-mode #welcomeCloseBtn {
     background-color: #3399ff;
     color: #222;
   }
-
   body.dark-mode #welcomeCloseBtn:hover {
     background-color: #1a75ff;
     color: white;
   }
-
-  /* Fade out effect */
-  #welcomeScreen.fade-out {
-    opacity: 0;
-    pointer-events: none;
-  }
-</style>
-<link href="styles/inject-style.css" rel="stylesheet" />
-<style>
-  body {
-    background: url('https://drive.diggy.network/api/public/dl/HztOunHx?inline=true') no-repeat center center fixed !important;
-    background-size: cover !important;
-    margin: 0; padding: 0;
-  }
-
-  #page-wrapper {
-    max-width: 960px;
-    margin: 40px auto;
-  }
 </style>
 </head>
 <body>
-<div id="page-wrapper">
   <!-- Welcome Screen -->
-  <div id="welcomeScreen" role="dialog" aria-modal="true" aria-labelledby="welcomeTitle" aria-describedby="welcomeDesc">
+  <div id="welcomeScreen" role="dialog" aria-modal="true" aria-labelledby="welcomeTitle">
     <div id="welcomeContent">
-      <h2 id="welcomeTitle">Welcome to Meow Archive!</h2>
-      <p id="welcomeDesc">
-        This archive is your gateway to a wide collection of curated content, including quotes, memes, positivity, art, and more.<br/><br/>
-        Use the navigation links to explore different sections. Don't hesitate to use the Settings button to toggle dark mode or background options.<br/><br/>
-        Enjoy your visit!
-      </p>
-      <button id="welcomeCloseBtn" aria-label="Close welcome screen">Close</button>
+      <h2 id="welcomeTitle">Welcome to Meow Archive</h2>
+      <p>This archive is under construction. Some things may not work properly until fully finished. Enjoy your visit!</p>
+      <button id="welcomeCloseBtn" aria-label="Close welcome screen">Got it!</button>
     </div>
   </div>
 
-  <!-- Main Panel -->
-  <div class="panel" role="region" aria-label="Main archive menu">
+  <!-- Main panel -->
+  <div class="panel" id="mainPanel" role="main" aria-label="Main navigation panel">
     <h1 class="animated-text">Meow Archive</h1>
-    <h3>Welcome to the catty side of the internet!</h3>
-    <h7>Curated with ❤️ by the Meow Team</h7>
-
+    <h3>Version 25.0603</h3>
+    <h7>Please note some things may not work properly until fully finished.</h7>
     <ul>
-      <li><a href="archive/smile.html" tabindex="0">Smile Quotations</a></li>
-      <li><a href="archive/purr.html" tabindex="0">Purr &amp; Positivity</a></li>
-      <li><a href="archive/art.html" tabindex="0">Feline Art</a></li>
-      <li><a href="archive/memes.html" tabindex="0">Cat Memes</a></li>
-      <li><a href="archive/archives.html" tabindex="0">More Archives</a></li>
+      <li><a href="quotes.html">#quotes</a></li>
+      <li><a href="intros.html">#introductions</a></li>
+      <li><a href="memes.html">#memes</a></li>
+      <li><a href="positivity.html">#positivity-place</a></li>
+      <!-- <li><a href="hobbies.html">#hobbies-and-interests</a></li> -->
+      <li><a href="distractedbf.html">#bot-commands(distractedbf)</a></li>
+      <li><a href="art.html">#art</a></li>
+      <li><a href="diary.html">#diary</a></li>
+      <li><a href="dream.html">#dream journal</a></li>
+      <li><a href="confess.html">confessions</a></li>
+      <li class="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a href="#" aria-haspopup="true" aria-expanded="false">#special-files ▼</a>
+        <div class="dropdown-content" role="menu" aria-label="Special files submenu">
+          <a href="donnydump-path.html" role="menuitem">donydump</a>
+          <a href="caughtin4k.html" role="menuitem">caught in 4k</a>
+          <a href="kitastare.html" role="menuitem">kitastare</a>
+          <a href="maddiespussies.html" role="menuitem">maddie's pussies</a>
+          <a href="onewordstory.html" role="menuitem">one word story</a>
+          <a href="xscream2.html" role="menuitem">xscream2</a>
+          <a href="finishthesong.html" role="menuitem">finish the song</a>
+        </div>
+      </li>
     </ul>
   </div>
-</div>
 
-<!-- Button container fixed on bottom right -->
-<div class="button-container" aria-label="Global controls">
-  <button id="darkToggle" aria-pressed="false" aria-label="Toggle dark mode">Dark Mode</button>
-  <button id="bgToggle" aria-pressed="true" aria-label="Toggle background image">Background</button>
-  <button id="openSettings" aria-haspopup="dialog" aria-controls="settingsModal">Settings</button>
-</div>
-
-<!-- Settings Modal -->
-<div id="settingsModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="settingsTitle" aria-describedby="settingsDesc" tabindex="-1">
-  <div class="modal-content">
-    <h2 id="settingsTitle">Settings</h2>
-    <p id="settingsDesc">Toggle display options:</p>
-    <button id="closeSettings" class="close" aria-label="Close settings modal">Close</button>
+  <!-- Bottom right buttons -->
+  <div class="button-container" aria-label="Page controls">
+    <button id="toggleDarkMode" aria-pressed="false" aria-label="Toggle dark mode">🌓</button>
+    <button id="toggleBackground" aria-pressed="false" aria-label="Toggle background image">🌄</button>
+    <button id="openSettings" aria-haspopup="dialog" aria-label="Open settings modal">⚙️</button>
   </div>
-</div>
 
-<script src="scripts/panel.js"></script>
+  <!-- Settings modal -->
+  <div class="modal" id="settingsModal" role="dialog" aria-modal="true" aria-labelledby="settingsTitle" aria-hidden="true">
+    <div class="modal-content">
+      <h2 id="settingsTitle">Settings</h2>
+      <p>Settings will be added here soon!</p>
+      <button class="close" id="closeSettingsBtn" aria-label="Close settings modal">Close</button>
+    </div>
+  </div>
 
-<!-- Welcome screen close button script -->
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const welcomeScreen = document.getElementById('welcomeScreen');
-    const welcomeCloseBtn = document.getElementById('welcomeCloseBtn');
+  // Welcome screen fade out
+  const welcomeScreen = document.getElementById('welcomeScreen');
+  const welcomeCloseBtn = document.getElementById('welcomeCloseBtn');
 
-    if (welcomeCloseBtn && welcomeScreen) {
-      welcomeCloseBtn.addEventListener('click', () => {
-        welcomeScreen.classList.add('fade-out');
-        setTimeout(() => {
-          welcomeScreen.style.display = 'none';
-        }, 500);
-      });
+  welcomeCloseBtn.addEventListener('click', () => {
+    welcomeScreen.style.opacity = '0';
+    setTimeout(() => {
+      welcomeScreen.style.display = 'none';
+    }, 500);
+  });
+
+  // Dark mode toggle
+  const darkToggle = document.getElementById('toggleDarkMode');
+  darkToggle.addEventListener('click', () => {
+    document.body.classList.toggle('dark-mode');
+    const isDark = document.body.classList.contains('dark-mode');
+    darkToggle.setAttribute('aria-pressed', isDark);
+  });
+
+  // Background toggle
+  const bgToggle = document.getElementById('toggleBackground');
+  bgToggle.addEventListener('click', () => {
+    document.body.classList.toggle('no-background');
+    const isBgOff = document.body.classList.contains('no-background');
+    bgToggle.setAttribute('aria-pressed', !isBgOff);
+  });
+
+  // Settings modal
+  const openSettingsBtn = document.getElementById('openSettings');
+  const settingsModal = document.getElementById('settingsModal');
+  const closeSettingsBtn = document.getElementById('closeSettingsBtn');
+
+  openSettingsBtn.addEventListener('click', () => {
+    settingsModal.style.display = 'flex';
+    settingsModal.setAttribute('aria-hidden', 'false');
+    closeSettingsBtn.focus();
+  });
+
+  closeSettingsBtn.addEventListener('click', () => {
+    settingsModal.style.display = 'none';
+    settingsModal.setAttribute('aria-hidden', 'true');
+    openSettingsBtn.focus();
+  });
+
+  // Close modal on outside click
+  settingsModal.addEventListener('click', (e) => {
+    if (e.target === settingsModal) {
+      settingsModal.style.display = 'none';
+      settingsModal.setAttribute('aria-hidden', 'true');
+      openSettingsBtn.focus();
     }
   });
 </script>
-
 </body>
 </html>
