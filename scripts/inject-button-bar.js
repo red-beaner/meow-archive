@@ -16,7 +16,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     <div id="contact-panel" style="display:none">
       <h2>Contact</h2>
+      <p>Discord User: redbeans._.</p>
       <p>Email: meowarchive@example.com</p>
+      <p>Server <a href="https://discord.gg/N7ypkN85Rk">Join Link</a> , join our community!.</p>
+      <p>To message me, join the server and then you'll be able to dm me.</p>
       <button onclick="closePanel('contact')">Close</button>
     </div>
 
