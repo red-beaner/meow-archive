@@ -1,53 +1,47 @@
-function setCookie(name, value, days = 365) {
-  const expires = new Date(Date.now() + days * 864e5).toUTCString();
-  document.cookie = name + "=" + encodeURIComponent(value) + "; expires=" + expires + "; path=/";
+function setCookie(name, value, days) {
+  const d = new Date();
+  d.setTime(d.getTime() + (days*24*60*60*1000));
+  let expires = "expires=" + d.toUTCString();
+  document.cookie = name + "=" + value + ";" + expires + ";path=/";
 }
 
 function getCookie(name) {
-  return document.cookie.split("; ").reduce((r, v) => {
-    const parts = v.split("=");
-    return parts[0] === name ? decodeURIComponent(parts[1]) : r
-  }, "");
+  let cname = name + "=";
+  let decodedCookie = decodeURIComponent(document.cookie);
+  let ca = decodedCookie.split(';');
+  for(let i = 0; i <ca.length; i++) {
+    let c = ca[i];
+    while (c.charAt(0) === ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(cname) === 0) {
+      return c.substring(cname.length, c.length);
+    }
+  }
+  return "";
 }
 
-function applySettingsFromCookies() {
-  if (getCookie("darkMode") === "true") {
-    document.body.classList.add("dark-mode");
-    const darkToggle = document.getElementById("darkModeToggle");
-    if (darkToggle) darkToggle.checked = true;
-  }
-
-  if (getCookie("bgImage") === "false") {
-    document.body.classList.add("no-bg");
-    const bgToggle = document.getElementById("bgToggle");
-    if (bgToggle) bgToggle.checked = false;
-  }
+function toggleSettingsMenu() {
+  document.getElementById('settingsMenu').classList.toggle('hidden');
 }
 
-function toggleSettings() {
-  const panel = document.getElementById("settings-panel");
-  if (panel) panel.style.display = panel.style.display === "none" ? "block" : "none";
+function toggleMode() {
+  const isDark = document.getElementById('modeToggle').checked;
+  document.body.classList.toggle('light-mode', !isDark);
+  setCookie('darkmode', isDark ? '1' : '0', 365);
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  applySettingsFromCookies();
+function toggleBackground() {
+  const isEnabled = document.getElementById('bgToggle').checked;
+  document.body.classList.toggle('bg-enabled', isEnabled);
+  setCookie('background', isEnabled ? '1' : '0', 365);
+}
 
-  const darkToggle = document.getElementById("darkModeToggle");
-  const bgToggle = document.getElementById("bgToggle");
-
-  if (darkToggle) {
-    darkToggle.addEventListener("change", () => {
-      const enabled = darkToggle.checked;
-      document.body.classList.toggle("dark-mode", enabled);
-      setCookie("darkMode", enabled ? "true" : "false");
-    });
-  }
-
-  if (bgToggle) {
-    bgToggle.addEventListener("change", () => {
-      const enabled = bgToggle.checked;
-      document.body.classList.toggle("no-bg", !enabled);
-      setCookie("bgImage", enabled ? "true" : "false");
-    });
-  }
-});
+window.onload = () => {
+  const darkMode = getCookie('darkmode') === '1';
+  const bgEnabled = getCookie('background') === '1';
+  document.body.classList.toggle('light-mode', !darkMode);
+  document.body.classList.toggle('bg-enabled', bgEnabled);
+  document.getElementById('modeToggle').checked = darkMode;
+  document.getElementById('bgToggle').checked = bgEnabled;
+};
