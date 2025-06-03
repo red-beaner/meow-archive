@@ -5,6 +5,11 @@
   <link rel="icon" type="image/png" href="cats.png">
   <title>Meow Archive</title>
   <style>
+    /* General styles */
+    * {
+      color: black;
+    }
+
     body {
       margin: 0;
       font-family: Arial, sans-serif;
@@ -24,12 +29,6 @@
       box-shadow: 0 8px 16px rgba(0,0,0,0.2);
     }
 
-    h1 {
-      text-align: center;
-      font-size: 24px;
-      margin-bottom: 20px;
-    }
-
     ul {
       list-style: none;
       padding: 0;
@@ -41,7 +40,6 @@
 
     a {
       text-decoration: none;
-      color: #333;
       font-weight: bold;
     }
 
@@ -49,6 +47,7 @@
       text-decoration: underline;
     }
 
+    /* Dropdown styles */
     .dropdown {
       position: relative;
     }
@@ -75,98 +74,125 @@
       padding: 5px 0;
     }
 
-    /* Welcome Popup */
-    .welcome-modal {
+    /* Contact button */
+    #contactButton {
       position: fixed;
-      top: 0; left: 0;
-      width: 100vw; height: 100vh;
-      background: rgba(0, 0, 0, 0.6);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 1s ease;
-      z-index: 9999;
+      bottom: 20px;
+      right: 20px;
+      padding: 10px 20px;
+      font-size: 16px;
     }
 
-    .welcome-modal.active {
-      opacity: 1;
-      pointer-events: auto;
+    /* Modal */
+    #contactModal {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.5);
     }
 
-    .welcome-box {
-      position: relative;
-      background: #111;
-      color: white;
-      padding: 30px;
-      border-radius: 20px;
-      max-width: 500px;
-      width: 90%;
-      text-align: center;
-      font-family: sans-serif;
-      z-index: 1;
-      overflow: hidden;
+    #contactModalContent {
+      background-color: #fff;
+      margin: 10% auto;
+      padding: 20px;
+      border-radius: 8px;
+      width: 80%;
+      max-width: 400px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.3);
     }
 
-    .glow-border {
-      position: absolute;
-      top: -4px; bottom: -4px;
-      left: -4px; right: -4px;
-      border-radius: 24px;
-      background: linear-gradient(270deg, #ff00cc, #3333ff, #00ffcc, #ffcc00);
-      background-size: 600% 600%;
-      animation: borderGlow 8s ease infinite;
-      z-index: -1;
-      filter: blur(8px);
-    }
-
+    /* Text color animation */
     @keyframes colorCycle {
-    0%   { color: #d2042d; }   /* Cherry Red */
-    33%  { color: #05386b; }   /* Deep Sea Blue */
-    66%  { color: #ffffff; }   /* White */
-    100% { color: #d2042d; }
+      0%   { color: #d2042d; }   /* Cherry Red */
+      33%  { color: #05386b; }   /* Deep Sea Blue */
+      66%  { color: #ffffff; }   /* White */
+      100% { color: #d2042d; }
     }
 
     .animate-text {
       animation: colorCycle 6s infinite;
     }
-    body {
-      color: black;
+
+    /* Welcome popup */
+    #welcomePopup {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.6);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 998;
+      animation: fadeIn 1s ease-in-out;
     }
 
-    .welcome-box button {
+    #welcomeBox {
+      background-color: white;
+      padding: 30px;
+      border-radius: 20px;
+      width: 350px;
+      text-align: center;
+      box-shadow: 0 0 20px rgba(0,0,0,0.4);
+      animation: scaleIn 0.6s ease-in-out;
+      border: 4px solid transparent;
+      background-clip: padding-box;
+    }
+
+    #welcomeBox img {
+      width: 100%;
+      border-radius: 12px;
+      margin-top: 10px;
+    }
+
+    #welcomeBox button {
       margin-top: 15px;
-      padding: 8px 20px;
-      font-size: 16px;
-      background-color: #444;
-      color: white;
+      padding: 8px 16px;
+      font-size: 14px;
       border: none;
-      border-radius: 5px;
+      background-color: #333;
+      color: white;
+      border-radius: 8px;
       cursor: pointer;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    @keyframes scaleIn {
+      from { transform: scale(0.8); opacity: 0; }
+      to   { transform: scale(1); opacity: 1; }
     }
   </style>
 </head>
 <body>
 
   <!-- Welcome Popup -->
-  <div id="welcomeModal" class="welcome-modal">
-    <div class="welcome-box">
-      <div class="glow-border"></div>
-      <h2>👋 Welcome!</h2>
-      <p>Welcome to the Meow Archive — a playful collection of Discord content and memories. Enjoy your visit!</p>
-      <button onclick="closeWelcome()">Close</button>
+  <div id="welcomePopup">
+    <div id="welcomeBox">
+      <h2 class="animate-text">Welcome to Meow Archive!</h2>
+      <p>This site is a Discord archive of fun messages, quotes, art, stories, and more.</p>
+      <img src="https://media.tenor.com/JfSRf-cJvu4AAAAi/sparkle-kirby.gif" alt="Colorful Border GIF">
+      <button onclick="document.getElementById('welcomePopup').style.display='none'">Enter</button>
     </div>
   </div>
 
   <!-- Contact Button -->
-  <button onclick="document.getElementById('contactModal').style.display='block'" style="position: fixed; bottom: 20px; right: 20px; padding: 10px 20px; font-size: 16px;">
+  <button id="contactButton" onclick="document.getElementById('contactModal').style.display='block'">
     Contact
   </button>
 
   <!-- Contact Modal -->
-  <div id="contactModal" style="display:none; position: fixed; z-index: 999; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.5);">
-    <div style="background-color: #fff; margin: 10% auto; padding: 20px; border-radius: 8px; width: 80%; max-width: 400px; box-shadow: 0 0 15px rgba(0,0,0,0.3);">
+  <div id="contactModal">
+    <div id="contactModalContent">
       <span onclick="document.getElementById('contactModal').style.display='none'" style="float:right; font-size:20px; cursor:pointer;">&times;</span>
       <h2>Contact Info</h2>
       <p><strong>Discord:</strong> redbeans._.</p>
@@ -176,11 +202,11 @@
     </div>
   </div>
 
-  <!-- Main Content -->
+  <!-- Main Panel -->
   <div class="panel">
-    <h1>Meow Archive</h1>
-    <h3>Version 25.0514</h3>
-    <h7>Please note some things may not work properly until fully finished.</h7>
+    <h1 class="animate-text">Meow Archive</h1>
+    <h3 class="animate-text">Version 25.0514</h3>
+    <h7 class="animate-text">Please note some things may not work properly until fully finished.</h7>
     <ul>
       <li><a href="quotes.html">#quotes</a></li>
       <li><a href="intros.html">#introductions</a></li>
@@ -206,19 +232,6 @@
       </li>
     </ul>
   </div>
-
-  <!-- Scripts -->
-  <script>
-    window.onload = () => {
-      const modal = document.getElementById("welcomeModal");
-      modal.classList.add("active");
-    };
-
-    function closeWelcome() {
-      const modal = document.getElementById("welcomeModal");
-      modal.classList.remove("active");
-    }
-  </script>
 
 </body>
 </html>
