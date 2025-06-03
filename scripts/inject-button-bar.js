@@ -1,11 +1,53 @@
-const placeholder = document.getElementById("button-bar-placeholder");
+document.addEventListener('DOMContentLoaded', () => {
+  // Create the custom button bar
+  const bar = document.createElement('div');
+  bar.id = 'custom-button-bar';
+  bar.innerHTML = `
+    <button onclick="togglePanel('settings')">Settings</button>
+    <button onclick="togglePanel('contact')">Contact</button>
+    <button onclick="togglePanel('updates')">Update Notes</button>
 
-if (placeholder) {
-  placeholder.innerHTML = `
-    <div class="button-bar">
-      <a href="index.html" class="nav-button">🏠 Home</a>
-      <a href="shared.html" class="nav-button">🔗 Shared</a>
-      <a href="clipsandlinks.html" class="nav-button">🎞️ Clips</a>
+    <div id="settings-panel" style="display:none">
+      <h2>Settings</h2>
+      <label><input type="checkbox" id="toggle-dark"> Dark Mode</label>
+      <label><input type="checkbox" id="toggle-bg"> Remove Background</label>
+      <button onclick="closePanel('settings')">Close</button>
+    </div>
+
+    <div id="contact-panel" style="display:none">
+      <h2>Contact</h2>
+      <p>Email: meowarchive@example.com</p>
+      <button onclick="closePanel('contact')">Close</button>
+    </div>
+
+    <div id="updates-panel" style="display:none">
+      <h2>Update Notes</h2>
+      <p>Version 25.0603 includes the new welcome screen, improved dark mode, and updated navigation.</p>
+      <button onclick="closePanel('updates')">Close</button>
     </div>
   `;
+  document.body.appendChild(bar);
+
+  // Event listeners
+  document.getElementById('toggle-dark').addEventListener('change', (e) => {
+    document.body.classList.toggle('dark-mode', e.target.checked);
+  });
+
+  document.getElementById('toggle-bg').addEventListener('change', (e) => {
+    document.body.classList.toggle('no-bg', e.target.checked);
+  });
+
+  // Add your background here
+  document.body.style.backgroundImage = 'url("https://yourdomain.com/background.jpg")';
+});
+
+function togglePanel(panel) {
+  document.getElementById('settings-panel').style.display = 'none';
+  document.getElementById('contact-panel').style.display = 'none';
+  document.getElementById('updates-panel').style.display = 'none';
+  document.getElementById(`${panel}-panel`).style.display = 'block';
+}
+
+function closePanel(panel) {
+  document.getElementById(`${panel}-panel`).style.display = 'none';
 }
