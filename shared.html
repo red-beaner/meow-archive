@@ -28,7 +28,12 @@
 <button onclick="openUpdate()">📝</button>
 </div>
 <!-- Modals -->
-
+<div class="modal" id="settingsModal">
+<div class="modal-content">
+<span class="close" onclick="closeSettings()">×</span>
+<h2>Settings</h2>
+<label><input id="darkModeToggle" type="checkbox"/> Dark Mode</label>
+</div>
 </div>
 <div class="modal" id="contactModal">
 <div class="modal-content">
@@ -45,6 +50,64 @@
 </div>
 </div>
 <!-- Shared Script -->
+<script>
+  const body = document.body;
+  const toggle = document.getElementById('darkModeToggle');
 
-<script src="scripts/inject-button-bar.js" defer></script>
+  const modals = {
+    settings: document.getElementById("settingsModal"),
+    contact: document.getElementById("contactModal"),
+    update: document.getElementById("updateModal"),
+  };
+
+  window.openSettings = () => modals.settings.style.display = "block";
+  window.closeSettings = () => modals.settings.style.display = "none";
+  window.openContact = () => modals.contact.style.display = "block";
+  window.closeContact = () => modals.contact.style.display = "none";
+  window.openUpdate = () => modals.update.style.display = "block";
+  window.closeUpdate = () => modals.update.style.display = "none";
+
+  if (toggle) {
+    toggle.addEventListener('change', () => {
+      body.classList.toggle('dark-mode', toggle.checked);
+    });
+  }
+
+  window.onclick = (event) => {
+    Object.values(modals).forEach(modal => {
+      if (event.target === modal) modal.style.display = "none";
+    });
+  };
+</script>
+<script src="/scripts/inject-button-bar.js"></script><body><link rel="stylesheet" href="styles/inject-style.css">
+<style>
+  body {
+    background: url('https://drive.diggy.network/api/public/dl/HztOunHx?inline=true') no-repeat center center fixed !important;
+    background-size: cover !important;
+    margin: 0; padding: 0;
+  }
+
+  #page-wrapper {
+    max-width: 960px;
+    margin: 40px auto;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  }
+
+  body.dark-mode #page-wrapper {
+    background: rgba(30, 30, 30, 0.85);
+    color: white;
+  }
+</style>
+
+
+
+
+
+
+
+
+<script defer="True" src="scripts/inject-button-bar.js"></script><script src="scripts/inject-button-bar.js" defer></script>
 </body>

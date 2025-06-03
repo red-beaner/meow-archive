@@ -1,55 +1,48 @@
 import os
 import re
 
-HTML_FOLDER = r'C:\Users\j\Documents\GitHub\meow-archive\meow-archive'  # Update as needed
+HTML_FOLDER = r'C:\Users\j\Documents\GitHub\meow-archive\meow-archive'  # Update this if needed
 
-def clean_html_content(content):
-    original = content
+NEW_CSS_TAG = '<link rel="stylesheet" href="styles/inject-style.css">'
+JS_TAG = '<script src="scripts/inject-button-bar.js" defer></script>'
 
-    # Remove checkboxes and their labels for "Dark Mode" or "Remove Background"
-    content = re.sub(r'<input[^>]*checkbox[^>]*>\s*(Dark Mode|Remove Background)', '', content, flags=re.IGNORECASE)
-    content = re.sub(r'<label[^>]*>(.*?)</label>', '', content, flags=re.IGNORECASE)
-
-    # Remove leftover "Close" buttons (from old modals or popups)
-    content = re.sub(r'<button[^>]*>\s*Close\s*</button>', '', content, flags=re.IGNORECASE)
-
-    # Remove inline <script> blocks related to old dark mode logic
-    content = re.sub(
-        r'<script[^>]*>.*?(dark|background).*?</script>',
-        '',
-        content,
-        flags=re.IGNORECASE | re.DOTALL
-    )
-
-    # Remove old floating UI divs (heuristically named things like "settings", "controls", "toggle")
-    content = re.sub(
-        r'<div[^>]*(id|class)="[^"]*(settings|controls|toggle)[^"]*"[^>]*>.*?</div>',
-        '',
-        content,
-        flags=re.IGNORECASE | re.DOTALL
-    )
-
-    return content if content != original else None
-
-def clean_file(path):
-    with open(path, 'r', encoding='utf-8') as file:
+def process_html_file(filepath):
+    with open(filepath, 'r', encoding='utf-8') as file:
         content = file.read()
 
-    cleaned = clean_html_content(content)
+    original = content
 
-    if cleaned:
-        with open(path, 'w', encoding='utf-8') as file:
-            file.write(cleaned)
-        print(f"Cleaned: {path}")
+    # Replace old CSS reference
+    content = re.sub(
+        r'<link[^>]*href=["\']?style\.css["\']?[^>]*>',
+        NEW_CSS_TAG,
+        content,
+        flags=re.IGNORECASE
+    )
+
+    # Check if the JS tag is already present
+    if JS_TAG not in content:
+        # Try inserting JS tag before closing </body> if present
+        if '</body>' in content.lower():
+            content = re.sub(r'</body>', f'{JS_TAG}\n</body>', content, flags=re.IGNORECASE)
+        else:
+            # Else insert at end of file
+            content += f'\n{JS_TAG}\n'
+
+    # Only write if something changed
+    if content != original:
+        with open(filepath, 'w', encoding='utf-8') as file:
+            file.write(content)
+        print(f"Updated: {filepath}")
     else:
-        print(f"No old UI found: {path}")
+        print(f"No changes needed: {filepath}")
 
-def run_cleanup(folder):
+def scan_directory(folder):
     for root, _, files in os.walk(folder):
         for file in files:
             if file.endswith('.html'):
-                clean_file(os.path.join(root, file))
+                process_html_file(os.path.join(root, file))
 
 if __name__ == "__main__":
-    run_cleanup(HTML_FOLDER)
-    print("\n✅ Old controls and UI cleaned up!")
+    scan_directory(HTML_FOLDER)
+    print("\nAll HTML files updated.")
