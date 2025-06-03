@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta content="width=device-width, initial-scale=1" name="viewport" />
 <title>Meow Archive</title>
 <style>
   body {
@@ -16,9 +16,11 @@
     align-items: center;
     transition: background-color 0.5s ease, color 0.5s ease;
   }
+
   body.no-background {
     background: none !important;
   }
+
   body.dark-mode::before {
     content: '';
     position: fixed;
@@ -27,21 +29,24 @@
     background: rgba(0, 0, 0, 0.75);
     z-index: -1;
   }
+
   .panel {
     background-color: rgba(255, 255, 255, 0.9);
     border-radius: 20px;
     padding: 30px 40px;
-    width: 320px;
+    width: 300px;
     box-shadow: 0 0 15px 4px #f00, 0 0 30px 8px #0077ff;
     animation: glow 3s infinite alternate;
     text-align: center;
     transition: background-color 0.5s ease, color 0.5s ease;
     z-index: 1;
   }
+
   body.dark-mode .panel {
     background-color: rgba(20, 20, 20, 0.9);
     color: white;
   }
+
   @keyframes glow {
     0% {
       box-shadow: 0 0 15px 4px #f00, 0 0 30px 8px #0077ff;
@@ -53,84 +58,42 @@
       box-shadow: 0 0 15px 4px #f00, 0 0 30px 8px #0077ff;
     }
   }
+
   .animated-text {
     animation: colorCycle 6s linear infinite;
     font-weight: bold;
     font-size: 24px;
   }
+
   @keyframes colorCycle {
     0%, 33% { color: #d2042d; }
     34%, 66% { color: #003e7e; }
     67%, 100% { color: #000; }
   }
+
   body.dark-mode .animated-text {
     animation: colorCycleDark 6s linear infinite;
   }
+
   @keyframes colorCycleDark {
     0%, 33% { color: #ff8a8a; }
     34%, 66% { color: #66aaff; }
     67%, 100% { color: #fff; }
   }
+
   h1, h3, h7 {
     margin: 0 0 15px 0;
   }
+
   h7 {
     font-size: 12px;
     color: #555;
   }
+
   body.dark-mode h7 {
     color: #ccc;
   }
-  ul {
-    list-style: none;
-    padding: 0;
-    margin: 20px 0 0 0;
-    text-align: left;
-  }
-  li {
-    margin: 10px 0;
-  }
-  a {
-    color: #003e7e;
-    text-decoration: none;
-    font-weight: bold;
-  }
-  a:hover {
-    text-decoration: underline;
-  }
-  body.dark-mode a {
-    color: #66aaff;
-  }
-  .dropdown {
-    position: relative;
-  }
-  .dropdown-content {
-    display: none;
-    position: absolute;
-    left: 0;
-    background-color: white;
-    min-width: 200px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    z-index: 10;
-    padding: 10px;
-  }
-  .dropdown:hover .dropdown-content {
-    display: block;
-  }
-  body.dark-mode .dropdown-content {
-    background-color: #333;
-    border-color: #666;
-  }
-  .dropdown-content a {
-    display: block;
-    padding: 5px 0;
-  }
-  body.dark-mode .dropdown-content a {
-    color: #ccc;
-  }
-  /* Button container fixed on bottom right */
+
   .button-container {
     position: fixed;
     bottom: 20px;
@@ -139,6 +102,7 @@
     gap: 10px;
     z-index: 1100;
   }
+
   button {
     padding: 10px 18px;
     font-size: 16px;
@@ -151,17 +115,81 @@
     transition: background-color 0.3s, color 0.3s;
     box-shadow: 0 2px 6px rgba(0,0,0,0.2);
   }
+
   button:hover {
     background-color: #ddd;
   }
+
   body.dark-mode button {
     background-color: #555;
     color: white;
     box-shadow: 0 2px 6px rgba(0,0,0,0.7);
   }
+
   body.dark-mode button:hover {
     background-color: #777;
   }
+
+  a {
+    color: #003e7e;
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
+  body.dark-mode a {
+    color: #66aaff;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0 0 0;
+    text-align: left;
+  }
+
+  li {
+    margin: 10px 0;
+  }
+
+  .dropdown {
+    position: relative;
+  }
+
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    left: 0;
+    background-color: white;
+    min-width: 200px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    z-index: 10;
+    padding: 10px;
+  }
+
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+
+  body.dark-mode .dropdown-content {
+    background-color: #333;
+    border-color: #666;
+  }
+
+  .dropdown-content a {
+    display: block;
+    padding: 5px 0;
+  }
+
+  body.dark-mode .dropdown-content a {
+    color: #ccc;
+  }
+
   /* Modal styles */
   .modal {
     display: none;
@@ -174,6 +202,7 @@
     align-items: center;
     z-index: 2000;
   }
+
   .modal-content {
     background-color: white;
     padding: 20px;
@@ -181,20 +210,24 @@
     width: 300px;
     text-align: center;
   }
+
   body.dark-mode .modal-content {
     background-color: #222;
     color: white;
   }
+
   .modal-content h2 {
     margin-top: 0;
   }
+
   .close {
     margin-top: 15px;
     cursor: pointer;
     font-weight: bold;
     color: #f00;
   }
-  /* Welcome screen */
+
+  /* === New styles for Welcome Screen === */
   #welcomeScreen {
     position: fixed;
     top: 0; left: 0;
@@ -211,10 +244,12 @@
     opacity: 1;
     transition: opacity 0.5s ease;
   }
+
   body.dark-mode #welcomeScreen {
     background: rgba(20, 20, 20, 0.95);
     color: white;
   }
+
   #welcomeContent {
     max-width: 400px;
     text-align: center;
@@ -223,14 +258,17 @@
     box-shadow: 0 0 15px rgba(0,0,0,0.2);
     background-color: inherit;
   }
+
   #welcomeContent h2 {
     margin-top: 0;
   }
+
   #welcomeContent p {
     margin: 20px 0;
     font-size: 16px;
     line-height: 1.4;
   }
+
   #welcomeCloseBtn {
     margin-top: 20px;
     padding: 10px 24px;
@@ -244,26 +282,53 @@
     box-shadow: 0 2px 6px rgba(0,0,0,0.3);
     transition: background-color 0.3s ease;
   }
+
   #welcomeCloseBtn:hover {
     background-color: #005fa3;
   }
+
   body.dark-mode #welcomeCloseBtn {
     background-color: #3399ff;
     color: #222;
   }
+
   body.dark-mode #welcomeCloseBtn:hover {
     background-color: #1a75ff;
     color: white;
   }
+
+  /* Fade out effect */
+  #welcomeScreen.fade-out {
+    opacity: 0;
+    pointer-events: none;
+  }
+</style>
+<link href="styles/inject-style.css" rel="stylesheet" />
+<style>
+  body {
+    background: url('https://drive.diggy.network/api/public/dl/HztOunHx?inline=true') no-repeat center center fixed !important;
+    background-size: cover !important;
+    margin: 0; padding: 0;
+  }
+
+  #page-wrapper {
+    max-width: 960px;
+    margin: 40px auto;
+  }
 </style>
 </head>
 <body>
+<div id="page-wrapper">
   <!-- Welcome Screen -->
-  <div id="welcomeScreen" role="dialog" aria-modal="true" aria-labelledby="welcomeTitle">
+  <div id="welcomeScreen" role="dialog" aria-modal="true" aria-labelledby="welcomeTitle" aria-describedby="welcomeDesc">
     <div id="welcomeContent">
-      <h2 id="welcomeTitle">Welcome to Meow Archive</h2>
-      <p>This archive is under construction. Some things may not work properly until fully finished. Enjoy your visit!</p>
-      <button id="welcomeCloseBtn" aria-label="Close welcome screen">Got it!</button>
+      <h2 id="welcomeTitle">Welcome to Meow Archive!</h2>
+      <p id="welcomeDesc">
+        This archive is your gateway to a wide collection of curated content, including quotes, memes, positivity, art, and more.<br/><br/>
+        Use the navigation links to explore different sections. Don't hesitate to use the Settings button to toggle dark mode or background options.<br/><br/>
+        Enjoy your visit!
+      </p>
+      <button id="welcomeCloseBtn" aria-label="Close welcome screen">Close</button>
     </div>
   </div>
 
@@ -298,73 +363,111 @@
     </ul>
   </div>
 
-  <!-- Bottom right buttons -->
-  <div class="button-container" aria-label="Page controls">
-    <button id="toggleDarkMode" aria-pressed="false" aria-label="Toggle dark mode">🌓</button>
-    <button id="toggleBackground" aria-pressed="false" aria-label="Toggle background image">🌄</button>
-    <button id="openSettings" aria-haspopup="dialog" aria-label="Open settings modal">⚙️</button>
+  <!-- Buttons at bottom right -->
+  <div class="button-container" role="navigation" aria-label="Page controls">
+    <button id="darkModeToggle" aria-pressed="false" aria-label="Toggle dark mode">Dark Mode</button>
+    <button id="backgroundToggle" aria-pressed="true" aria-label="Toggle background image">Background</button>
+    <button id="settingsBtn" aria-haspopup="true" aria-expanded="false" aria-label="Open settings menu">Settings</button>
+    <button id="patchNotesBtn" aria-label="Open patch notes">Patch Notes</button>
+    <button id="contactBtn" aria-label="Open contact page">Contact</button>
   </div>
+</div>
 
-  <!-- Settings modal -->
-  <div class="modal" id="settingsModal" role="dialog" aria-modal="true" aria-labelledby="settingsTitle" aria-hidden="true">
-    <div class="modal-content">
-      <h2 id="settingsTitle">Settings</h2>
-      <p>Settings will be added here soon!</p>
-      <button class="close" id="closeSettingsBtn" aria-label="Close settings modal">Close</button>
-    </div>
+<!-- Modals -->
+<div id="settingsModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="settingsTitle" aria-describedby="settingsDesc">
+  <div class="modal-content">
+    <h2 id="settingsTitle">Settings</h2>
+    <p id="settingsDesc">Settings will go here.</p>
+    <button class="close" aria-label="Close settings">Close</button>
   </div>
+</div>
+
+<div id="patchNotesModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="patchNotesTitle" aria-describedby="patchNotesDesc">
+  <div class="modal-content">
+    <h2 id="patchNotesTitle">Patch Notes</h2>
+    <p id="patchNotesDesc">
+      Version 25.0603:<br/>
+      - Updated navigation links.<br/>
+      - Added Patch Notes and Contact buttons.<br/>
+      - Improved UI and accessibility.<br/>
+      - Fixed some bugs.<br/>
+    </p>
+    <button class="close" aria-label="Close patch notes">Close</button>
+  </div>
+</div>
 
 <script>
-  // Welcome screen fade out
+  // Welcome screen close button
   const welcomeScreen = document.getElementById('welcomeScreen');
   const welcomeCloseBtn = document.getElementById('welcomeCloseBtn');
-
   welcomeCloseBtn.addEventListener('click', () => {
-    welcomeScreen.style.opacity = '0';
+    welcomeScreen.classList.add('fade-out');
     setTimeout(() => {
       welcomeScreen.style.display = 'none';
     }, 500);
   });
 
   // Dark mode toggle
-  const darkToggle = document.getElementById('toggleDarkMode');
-  darkToggle.addEventListener('click', () => {
-    document.body.classList.toggle('dark-mode');
-    const isDark = document.body.classList.contains('dark-mode');
-    darkToggle.setAttribute('aria-pressed', isDark);
+  const darkModeToggle = document.getElementById('darkModeToggle');
+  darkModeToggle.addEventListener('click', () => {
+    const isDark = document.body.classList.toggle('dark-mode');
+    darkModeToggle.setAttribute('aria-pressed', isDark);
   });
 
   // Background toggle
-  const bgToggle = document.getElementById('toggleBackground');
-  bgToggle.addEventListener('click', () => {
-    document.body.classList.toggle('no-background');
-    const isBgOff = document.body.classList.contains('no-background');
-    bgToggle.setAttribute('aria-pressed', !isBgOff);
+  const backgroundToggle = document.getElementById('backgroundToggle');
+  backgroundToggle.addEventListener('click', () => {
+    const noBg = document.body.classList.toggle('no-background');
+    backgroundToggle.setAttribute('aria-pressed', !noBg);
   });
 
   // Settings modal
-  const openSettingsBtn = document.getElementById('openSettings');
+  const settingsBtn = document.getElementById('settingsBtn');
   const settingsModal = document.getElementById('settingsModal');
-  const closeSettingsBtn = document.getElementById('closeSettingsBtn');
+  const patchNotesBtn = document.getElementById('patchNotesBtn');
+  const patchNotesModal = document.getElementById('patchNotesModal');
+  const contactBtn = document.getElementById('contactBtn');
 
-  openSettingsBtn.addEventListener('click', () => {
+  settingsBtn.addEventListener('click', () => {
     settingsModal.style.display = 'flex';
-    settingsModal.setAttribute('aria-hidden', 'false');
-    closeSettingsBtn.focus();
+    settingsBtn.setAttribute('aria-expanded', 'true');
   });
 
-  closeSettingsBtn.addEventListener('click', () => {
-    settingsModal.style.display = 'none';
-    settingsModal.setAttribute('aria-hidden', 'true');
-    openSettingsBtn.focus();
+  patchNotesBtn.addEventListener('click', () => {
+    patchNotesModal.style.display = 'flex';
   });
 
-  // Close modal on outside click
-  settingsModal.addEventListener('click', (e) => {
-    if (e.target === settingsModal) {
-      settingsModal.style.display = 'none';
-      settingsModal.setAttribute('aria-hidden', 'true');
-      openSettingsBtn.focus();
+  contactBtn.addEventListener('click', () => {
+    // Just navigate to contact.html page
+    window.location.href = 'contact.html';
+  });
+
+  // Close modal buttons
+  const closeButtons = document.querySelectorAll('.modal .close');
+  closeButtons.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.target.closest('.modal').style.display = 'none';
+      settingsBtn.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  // Close modals if click outside content
+  window.addEventListener('click', (e) => {
+    if (e.target.classList.contains('modal')) {
+      e.target.style.display = 'none';
+      settingsBtn.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  // Accessibility: Close modals on Escape key
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.modal').forEach(modal => {
+        if (modal.style.display === 'flex') {
+          modal.style.display = 'none';
+          settingsBtn.setAttribute('aria-expanded', 'false');
+        }
+      });
     }
   });
 </script>
