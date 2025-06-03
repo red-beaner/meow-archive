@@ -340,8 +340,8 @@
 <div class="modal" id="settingsModal">
 <div class="modal-content">
 <h2>Settings</h2>
-
-
+<label><input id="darkModeToggle" type="checkbox"/> Dark Mode</label><br>
+<label><input id="noBackgroundToggle" type="checkbox"/> Remove Background</label><br>
 <button id="settingsCloseBtn">Close</button>
 </br></br></div>
 </div>
@@ -400,21 +400,5 @@
 </li>
 </ul>
 </div><!-- Settings Modal --><!-- Contact Modal --><!-- Update Notes Modal --><script defer="True" src="scripts/inject-button-bar.js"></script></div><script src="scripts/inject-button-bar.js" defer></script>
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const closeBtn = document.getElementById("welcomeCloseBtn");
-    const welcomeScreen = document.getElementById("welcomeScreen");
-
-    if (closeBtn && welcomeScreen) {
-      closeBtn.addEventListener("click", () => {
-        welcomeScreen.classList.add("fade-out");
-        setTimeout(() => {
-          welcomeScreen.style.display = "none";
-        }, 500); // matches fade-out transition duration
-      });
-    }
-  });
-</script>
-
 </body>
 </html>
