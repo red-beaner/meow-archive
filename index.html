@@ -337,20 +337,14 @@
 </div>
 
 
-<div class="modal" id="settingsModal">
-<div class="modal-content">
-<h2>Settings</h2>
-<label><input id="darkModeToggle" type="checkbox"/> Dark Mode</label><br>
-<label><input id="noBackgroundToggle" type="checkbox"/> Remove Background</label><br>
-<button id="settingsCloseBtn">Close</button>
-</br></br></div>
+
 </div>
 
 <div class="modal" id="contactModal">
 <div class="modal-content">
 <h2>Contact</h2>
 <p>Email: meowarchive@example.com</p>
-<button id="contactCloseBtn">Close</button>
+
 </div>
 </div>
 
@@ -358,7 +352,7 @@
 <div class="modal-content">
 <h2>Update Notes</h2>
 <p>Version 25.0603 includes the new welcome screen, improved dark mode, and updated navigation.</p>
-<button id="updateCloseBtn">Close</button>
+
 </div>
 </div>
 
@@ -370,7 +364,7 @@
         Use the navigation links to explore different sections. Don't hesitate to use the Settings button to toggle dark mode or background options.<br/><br/>
         Enjoy your visit!
       </p>
-<button aria-label="Close welcome screen" id="welcomeCloseBtn">Close</button>
+
 </div>
 </div><div class="panel">
 <h1 class="animated-text">Meow Archive</h1>
@@ -399,86 +393,6 @@
 </div>
 </li>
 </ul>
-</div><!-- Settings Modal --><!-- Contact Modal --><!-- Update Notes Modal --><script>
-    // Welcome screen close button
-    const welcomeScreen = document.getElementById('welcomeScreen');
-    const welcomeCloseBtn = document.getElementById('welcomeCloseBtn');
-
-    welcomeCloseBtn.addEventListener('click', () => {
-      // Add fade-out class for smooth fade
-      welcomeScreen.classList.add('fade-out');
-      // Remove from DOM after fade-out duration (0.5s)
-      setTimeout(() => {
-        welcomeScreen.style.display = 'none';
-      }, 500);
-    });
-
-    // Settings modal
-    const settingsBtn = document.getElementById('settingsBtn');
-    const settingsModal = document.getElementById('settingsModal');
-    const settingsCloseBtn = document.getElementById('settingsCloseBtn');
-    const darkModeToggle = document.getElementById('darkModeToggle');
-    const noBackgroundToggle = document.getElementById('noBackgroundToggle');
-
-    settingsBtn.addEventListener('click', () => {
-      settingsModal.style.display = 'flex';
-      // Load saved settings
-      darkModeToggle.checked = document.body.classList.contains('dark-mode');
-      noBackgroundToggle.checked = document.body.classList.contains('no-background');
-    });
-
-    settingsCloseBtn.addEventListener('click', () => {
-      settingsModal.style.display = 'none';
-    });
-
-    darkModeToggle.addEventListener('change', () => {
-      if (darkModeToggle.checked) {
-        document.body.classList.add('dark-mode');
-      } else {
-        document.body.classList.remove('dark-mode');
-      }
-    });
-
-    noBackgroundToggle.addEventListener('change', () => {
-      if (noBackgroundToggle.checked) {
-        document.body.classList.add('no-background');
-      } else {
-        document.body.classList.remove('no-background');
-      }
-    });
-
-    // Contact modal
-    const contactBtn = document.getElementById('contactBtn');
-    const contactModal = document.getElementById('contactModal');
-    const contactCloseBtn = document.getElementById('contactCloseBtn');
-
-    contactBtn.addEventListener('click', () => {
-      contactModal.style.display = 'flex';
-    });
-
-    contactCloseBtn.addEventListener('click', () => {
-      contactModal.style.display = 'none';
-    });
-
-    // Update notes modal
-    const updateBtn = document.getElementById('updateBtn');
-    const updateModal = document.getElementById('updateModal');
-    const updateCloseBtn = document.getElementById('updateCloseBtn');
-
-    updateBtn.addEventListener('click', () => {
-      updateModal.style.display = 'flex';
-    });
-
-    updateCloseBtn.addEventListener('click', () => {
-      updateModal.style.display = 'none';
-    });
-
-    // Close modals on outside click
-    window.addEventListener('click', (e) => {
-      if (e.target === settingsModal) settingsModal.style.display = 'none';
-      if (e.target === contactModal) contactModal.style.display = 'none';
-      if (e.target === updateModal) updateModal.style.display = 'none';
-    });
-  </script><script defer="True" src="scripts/inject-button-bar.js"></script></div><script src="scripts/inject-button-bar.js" defer></script>
+</div><!-- Settings Modal --><!-- Contact Modal --><!-- Update Notes Modal --><script defer="True" src="scripts/inject-button-bar.js"></script></div><script src="scripts/inject-button-bar.js" defer></script>
 </body>
 </html>
