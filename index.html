@@ -381,6 +381,20 @@
     <button class="close" aria-label="Close settings">Close</button>
   </div>
 </div>
+<!-- Contact Modal -->
+<div id="contactModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="contactTitle" aria-describedby="contactDesc">
+  <div class="modal-content">
+    <h2 id="contactTitle">Patch Notes</h2>
+    <p id="contactDesc">
+      Contact the Developer<br/>
+      <p><strong>Discord:</strong> redbeans._.</p>
+      <p><strong>Server:</strong> <a href="https://discord.gg/N7ypkN85Rk" target="_blank" rel="noopener">Join here</a></p>
+      <p><strong>Email:</strong> email added in the future</p>
+      <p><strong>Other:</strong> Found a bug? Suggest something? Let me know!</p>
+    </p>
+    <button class="close" aria-label="Close patch notes">Close</button>
+  </div>
+</div>
 
 <div id="patchNotesModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="patchNotesTitle" aria-describedby="patchNotesDesc">
   <div class="modal-content">
@@ -439,7 +453,7 @@
 
   contactBtn.addEventListener('click', () => {
     // Just navigate to contact.html page
-    window.location.href = 'contact.html';
+    contactModal.style.display = 'flex';
   });
 
   // Close modal buttons
