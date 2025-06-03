@@ -1,0 +1,32 @@
+body {
+  margin: 0;
+  font-family: sans-serif;
+  background-color: #f0f0f0;
+  color: #000;
+  transition: background 0.3s, color 0.3s;
+  background-image: url('https://drive.diggy.network/api/public/dl/HztOunHx?inline=true');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+body.dark-mode {
+  background-color: #121212;
+  color: #f0f0f0;
+}
+
+body.no-bg {
+  background-image: none !important;
+}
+
+#main-content {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  background: rgba(255,255,255,0.85);
+  border-radius: 10px;
+}
+
+body.dark-mode #main-content {
+  background: rgba(0,0,0,0.7);
+}
