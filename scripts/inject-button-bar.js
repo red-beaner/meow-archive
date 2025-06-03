@@ -20,6 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
       <p>Email: meowarchive@example.com</p>
       <p>Server <a href="https://discord.gg/N7ypkN85Rk">Join Link</a> , join our community!.</p>
       <p>To message me, join the server and then you'll be able to dm me.</p>
+      <p>Main page <a href="https://red-beaner.github.io/meow-archive/">link</a></p>
       <button onclick="closePanel('contact')">Close</button>
     </div>
 
