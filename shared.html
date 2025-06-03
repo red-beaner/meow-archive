@@ -1,36 +1,54 @@
-<div id="button-bar-placeholder"></div>
+<head><link href="style.css" rel="stylesheet"/>
+<style>
+  body {
+    background: url('https://drive.diggy.network/api/public/dl/HztOunHx?inline=true') no-repeat center center fixed !important;
+    background-size: cover !important;
+    margin: 0; padding: 0;
+  }
+
+  #page-wrapper {
+    max-width: 960px;
+    margin: 40px auto;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  }
+
+  body.dark-mode #page-wrapper {
+    background: rgba(30, 30, 30, 0.85);
+    color: white;
+  }
+</style>
+</head><div id="button-bar-placeholder"></div>
 <!-- Buttons container -->
 <div class="buttons">
-  <button onclick="openSettings()">⚙️</button>
-  <button onclick="openContact()">📞</button>
-  <button onclick="openUpdate()">📝</button>
+<button onclick="openSettings()">⚙️</button>
+<button onclick="openContact()">📞</button>
+<button onclick="openUpdate()">📝</button>
 </div>
-
 <!-- Modals -->
-<div id="settingsModal" class="modal">
-  <div class="modal-content">
-    <span class="close" onclick="closeSettings()">&times;</span>
-    <h2>Settings</h2>
-    <label><input type="checkbox" id="darkModeToggle"> Dark Mode</label>
-  </div>
+<div class="modal" id="settingsModal">
+<div class="modal-content">
+<span class="close" onclick="closeSettings()">×</span>
+<h2>Settings</h2>
+<label><input id="darkModeToggle" type="checkbox"/> Dark Mode</label>
 </div>
-
-<div id="contactModal" class="modal">
-  <div class="modal-content">
-    <span class="close" onclick="closeContact()">&times;</span>
-    <h2>Contact</h2>
-    <p>Contact us at dony@dony.network</p>
-  </div>
 </div>
-
-<div id="updateModal" class="modal">
-  <div class="modal-content">
-    <span class="close" onclick="closeUpdate()">&times;</span>
-    <h2>Update Notes</h2>
-    <p>Latest updates will be shown here.</p>
-  </div>
+<div class="modal" id="contactModal">
+<div class="modal-content">
+<span class="close" onclick="closeContact()">×</span>
+<h2>Contact</h2>
+<p>Contact us at dony@dony.network</p>
 </div>
-
+</div>
+<div class="modal" id="updateModal">
+<div class="modal-content">
+<span class="close" onclick="closeUpdate()">×</span>
+<h2>Update Notes</h2>
+<p>Latest updates will be shown here.</p>
+</div>
+</div>
 <!-- Shared Script -->
 <script>
   const body = document.body;
@@ -61,5 +79,34 @@
     });
   };
 </script>
+<script src="/scripts/inject-button-bar.js"></script><body><link href="style.css" rel="stylesheet"/>
+<style>
+  body {
+    background: url('https://drive.diggy.network/api/public/dl/HztOunHx?inline=true') no-repeat center center fixed !important;
+    background-size: cover !important;
+    margin: 0; padding: 0;
+  }
 
-<script src="/scripts/inject-button-bar.js"></script>
+  #page-wrapper {
+    max-width: 960px;
+    margin: 40px auto;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  }
+
+  body.dark-mode #page-wrapper {
+    background: rgba(30, 30, 30, 0.85);
+    color: white;
+  }
+</style>
+
+
+
+
+
+
+
+
+<script defer="True" src="scripts/inject-button-bar.js"></script></body>

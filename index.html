@@ -1,10 +1,11 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Meow Archive</title>
-  <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Meow Archive</title>
+<style>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
@@ -303,85 +304,102 @@
       pointer-events: none;
     }
   </style>
+<link href="style.css" rel="stylesheet"/>
+<style>
+  body {
+    background: url('https://drive.diggy.network/api/public/dl/HztOunHx?inline=true') no-repeat center center fixed !important;
+    background-size: cover !important;
+    margin: 0; padding: 0;
+  }
+
+  #page-wrapper {
+    max-width: 960px;
+    margin: 40px auto;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  }
+
+  body.dark-mode #page-wrapper {
+    background: rgba(30, 30, 30, 0.85);
+    color: white;
+  }
+</style>
 </head>
 <body>
-  <!-- Welcome Screen -->
-  <div id="welcomeScreen" role="dialog" aria-modal="true" aria-labelledby="welcomeTitle" aria-describedby="welcomeDesc">
-    <div id="welcomeContent">
-      <h2 id="welcomeTitle">Welcome to Meow Archive!</h2>
-      <p id="welcomeDesc">
-        This archive is your gateway to a wide collection of curated content, including quotes, memes, positivity, art, and more.<br><br>
-        Use the navigation links to explore different sections. Don't hesitate to use the Settings button to toggle dark mode or background options.<br><br>
+
+
+<div class="button-container">
+<button id="contactBtn">Contact</button>
+<button id="settingsBtn">Settings</button>
+<button id="updateBtn">Update Notes</button>
+</div>
+
+
+<div class="modal" id="settingsModal">
+<div class="modal-content">
+<h2>Settings</h2>
+<label><input id="darkModeToggle" type="checkbox"/> Dark Mode</label><br>
+<label><input id="noBackgroundToggle" type="checkbox"/> Remove Background</label><br>
+<button id="settingsCloseBtn">Close</button>
+</br></br></div>
+</div>
+
+<div class="modal" id="contactModal">
+<div class="modal-content">
+<h2>Contact</h2>
+<p>Email: meowarchive@example.com</p>
+<button id="contactCloseBtn">Close</button>
+</div>
+</div>
+
+<div class="modal" id="updateModal">
+<div class="modal-content">
+<h2>Update Notes</h2>
+<p>Version 25.0603 includes the new welcome screen, improved dark mode, and updated navigation.</p>
+<button id="updateCloseBtn">Close</button>
+</div>
+</div>
+
+<div id="page-wrapper"><!-- Welcome Screen --><div aria-describedby="welcomeDesc" aria-labelledby="welcomeTitle" aria-modal="true" id="welcomeScreen" role="dialog">
+<div id="welcomeContent">
+<h2 id="welcomeTitle">Welcome to Meow Archive!</h2>
+<p id="welcomeDesc">
+        This archive is your gateway to a wide collection of curated content, including quotes, memes, positivity, art, and more.<br/><br/>
+        Use the navigation links to explore different sections. Don't hesitate to use the Settings button to toggle dark mode or background options.<br/><br/>
         Enjoy your visit!
       </p>
-      <button id="welcomeCloseBtn" aria-label="Close welcome screen">Close</button>
-    </div>
-  </div>
-
-  <div class="button-container">
-    <button id="contactBtn">Contact</button>
-    <button id="settingsBtn">Settings</button>
-    <button id="updateBtn">Update Notes</button>
-  </div>
-
-  <div class="panel">
-    <h1 class="animated-text">Meow Archive</h1>
-    <h3>Version 25.0603</h3>
-    <h7>Please note some things may not work properly until fully finished.</h7>
-    <ul>
-      <li><a href="quotes.html">#quotes</a></li>
-      <li><a href="intros.html">#introductions</a></li>
-      <li><a href="memes.html">#memes</a></li>
-      <li><a href="positivity.html">#positivity-place</a></li>
-      <li><a href="distractedbf.html">#bot-commands(distractedbf)</a></li>
-      <li><a href="art.html">#art</a></li>
-      <li><a href="diary.html">#diary</a></li>
-      <li><a href="dream.html">#dream journal</a></li>
-      <li><a href="confess.html">confessions</a></li>
-      <li class="dropdown">
-        <a href="#">#special-files ▼</a>
-        <div class="dropdown-content">
-          <a href="donnydump-path.html">donydump</a>
-          <a href="caughtin4k.html">caught in 4k</a>
-          <a href="kitastare.html">kitastare</a>
-          <a href="maddiespussies.html">maddie's pussies</a>
-          <a href="onewordstory.html">one word story</a>
-          <a href="xscream2.html">xscream2</a>
-          <a href="finishthesong.html">finish the song</a>
-        </div>
-      </li>
-    </ul>
-  </div>
-
-  <!-- Settings Modal -->
-  <div id="settingsModal" class="modal">
-    <div class="modal-content">
-      <h2>Settings</h2>
-      <label><input type="checkbox" id="darkModeToggle" /> Dark Mode</label><br />
-      <label><input type="checkbox" id="noBackgroundToggle" /> Remove Background</label><br />
-      <button id="settingsCloseBtn">Close</button>
-    </div>
-  </div>
-
-  <!-- Contact Modal -->
-  <div id="contactModal" class="modal">
-    <div class="modal-content">
-      <h2>Contact</h2>
-      <p>Email: meowarchive@example.com</p>
-      <button id="contactCloseBtn">Close</button>
-    </div>
-  </div>
-
-  <!-- Update Notes Modal -->
-  <div id="updateModal" class="modal">
-    <div class="modal-content">
-      <h2>Update Notes</h2>
-      <p>Version 25.0603 includes the new welcome screen, improved dark mode, and updated navigation.</p>
-      <button id="updateCloseBtn">Close</button>
-    </div>
-  </div>
-
-  <script>
+<button aria-label="Close welcome screen" id="welcomeCloseBtn">Close</button>
+</div>
+</div><div class="panel">
+<h1 class="animated-text">Meow Archive</h1>
+<h3>Version 25.0603</h3>
+<h7>Please note some things may not work properly until fully finished.</h7>
+<ul>
+<li><a href="quotes.html">#quotes</a></li>
+<li><a href="intros.html">#introductions</a></li>
+<li><a href="memes.html">#memes</a></li>
+<li><a href="positivity.html">#positivity-place</a></li>
+<li><a href="distractedbf.html">#bot-commands(distractedbf)</a></li>
+<li><a href="art.html">#art</a></li>
+<li><a href="diary.html">#diary</a></li>
+<li><a href="dream.html">#dream journal</a></li>
+<li><a href="confess.html">confessions</a></li>
+<li class="dropdown">
+<a href="#">#special-files ▼</a>
+<div class="dropdown-content">
+<a href="donnydump-path.html">donydump</a>
+<a href="caughtin4k.html">caught in 4k</a>
+<a href="kitastare.html">kitastare</a>
+<a href="maddiespussies.html">maddie's pussies</a>
+<a href="onewordstory.html">one word story</a>
+<a href="xscream2.html">xscream2</a>
+<a href="finishthesong.html">finish the song</a>
+</div>
+</li>
+</ul>
+</div><!-- Settings Modal --><!-- Contact Modal --><!-- Update Notes Modal --><script>
     // Welcome screen close button
     const welcomeScreen = document.getElementById('welcomeScreen');
     const welcomeCloseBtn = document.getElementById('welcomeCloseBtn');
@@ -461,6 +479,5 @@
       if (e.target === contactModal) contactModal.style.display = 'none';
       if (e.target === updateModal) updateModal.style.display = 'none';
     });
-  </script>
-</body>
+  </script><script defer="True" src="scripts/inject-button-bar.js"></script></div></body>
 </html>

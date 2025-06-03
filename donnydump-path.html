@@ -1,10 +1,11 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <link rel="icon" type="image/png" href="cats.png">
-  <meta charset="UTF-8">
-  <title>Enter Password</title>
-  <style>
+<link href="cats.png" rel="icon" type="image/png"/>
+<meta charset="utf-8"/>
+<title>Enter Password</title>
+<style>
     body {
       font-family: sans-serif;
       background: #f4f4f4;
@@ -30,17 +31,71 @@
       display: none;
     }
   </style>
+<link href="style.css" rel="stylesheet"/>
+<style>
+  body {
+    background: url('https://drive.diggy.network/api/public/dl/HztOunHx?inline=true') no-repeat center center fixed !important;
+    background-size: cover !important;
+    margin: 0; padding: 0;
+  }
+
+  #page-wrapper {
+    max-width: 960px;
+    margin: 40px auto;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  }
+
+  body.dark-mode #page-wrapper {
+    background: rgba(30, 30, 30, 0.85);
+    color: white;
+  }
+</style>
 </head>
 <body>
-<div id="button-bar-placeholder"></div>
-  <div id="login-box">
-    <h2>Enter Password</h2>
-    <input type="password" id="password" placeholder="Password">
-    <button id="accessBtn">Access</button>
-    <div class="error" id="error">Incorrect password.</div>
-  </div>
+<div class="button-container">
+<button id="contactBtn">Contact</button>
+<button id="settingsBtn">Settings</button>
+<button id="updateBtn">Update Notes</button>
+</div>
 
-  <script>
+<div class="modal" id="settingsModal">
+<div class="modal-content">
+<h2>Settings</h2>
+<label><input id="darkModeToggle" type="checkbox"/> Dark Mode</label><br/>
+<label><input id="noBackgroundToggle" type="checkbox"/> Remove Background</label><br/>
+<button id="settingsCloseBtn">Close</button>
+</div>
+</div>
+
+<div class="modal" id="contactModal">
+<div class="modal-content">
+<h2>Contact</h2>
+<p>Email: meowarchive@example.com</p>
+<button id="contactCloseBtn">Close</button>
+</div>
+</div>
+
+<div class="modal" id="updateModal">
+<div class="modal-content">
+<h2>Update Notes</h2>
+<p>Version 25.0603 includes the new welcome screen, improved dark mode, and updated navigation.</p>
+<button id="updateCloseBtn">Close</button>
+</div>
+</div>
+
+
+
+
+
+<div id="page-wrapper"><!-- Settings Modal --><!-- Contact Modal --><!-- Update Notes Modal --><div id="button-bar-placeholder"></div><div id="login-box">
+<h2>Enter Password</h2>
+<input id="password" placeholder="Password" type="password"/>
+<button id="accessBtn">Access</button>
+<div class="error" id="error">Incorrect password.</div>
+</div><script>
     document.getElementById("accessBtn").addEventListener("click", () => {
       const password = document.getElementById("password").value;
       const correct = "democracyforever"; // plaintext match
@@ -51,7 +106,5 @@
         document.getElementById("error").style.display = "block";
       }
     });
-  </script>
-<script src="/scripts/inject-button-bar.js"></script>
-</body>
+  </script><script src="/scripts/inject-button-bar.js"></script><script defer="True" src="scripts/inject-button-bar.js"></script></div></body>
 </html>
