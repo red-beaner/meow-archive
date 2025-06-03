@@ -92,47 +92,47 @@
   pointer-events: none;
   transition: opacity 1s ease;
   ">
-  <div style="
-    background: #111;
-    color: #fff;
-    padding: 20px;
-    max-width: 500px;
-    width: 90%;
-    border: 10px solid transparent;
-    border-image: url('https://drive.diggy.network/api/preview/big/blueloadscreen_1.gif?auth=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoyLCJsb2NhbGUiOiJlbiIsInZpZXdNb2RlIjoibW9zYWljIiwic2luZ2xlQ2xpY2siOmZhbHNlLCJwZXJtIjp7ImFkbWluIjpmYWxzZSwiZXhlY3V0ZSI6dHJ1ZSwiY3JlYXRlIjp0cnVlLCJyZW5hbWUiOnRydWUsIm1vZGlmeSI6dHJ1ZSwiZGVsZXRlIjp0cnVlLCJzaGFyZSI6dHJ1ZSwiZG93bmxvYWQiOnRydWV9LCJjb21tYW5kcyI6W10sImxvY2tQYXNzd29yZCI6ZmFsc2UsImhpZGVEb3RmaWxlcyI6ZmFsc2UsImRhdGVGb3JtYXQiOmZhbHNlfSwiaXNzIjoiRmlsZSBCcm93c2VyIiwiZXhwIjoxNzQ4OTIwODQ1LCJpYXQiOjE3NDg5MTM2NDV9.T4-tsLUNtTT2iZKK2KZaJsZ5m-GCLnnRVcSmt6n376Q&inline=true&key=1748913665205') 30 round;
-    border-radius: 15px;
-    box-shadow: 0 0 25px rgba(255,255,255,0.2);
-    text-align: center;
-    font-family: sans-serif;
-  ">
-    <h2 style="margin-top: 0;">👋 Welcome!</h2>
-    <p>This is a simple archive of past Discord events, messages, and content. Use it to explore or revisit moments. If you find any issues, feel free to use the contact button!</p>
-    <button onclick="closeWelcome()" style="
-      margin-top: 15px;
-      padding: 8px 20px;
-      font-size: 16px;
-      background-color: #444;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    ">Close</button>
-  </div>
+    <div style="
+      background: #111;
+      color: #fff;
+      padding: 20px;
+      max-width: 500px;
+      width: 90%;
+      border: 10px solid transparent;
+      border-image: url('https://drive.diggy.network/api/preview/big/blueloadscreen_1.gif?auth=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoyLCJsb2NhbGUiOiJlbiIsInZpZXdNb2RlIjoibW9zYWljIiwic2luZ2xlQ2xpY2siOmZhbHNlLCJwZXJtIjp7ImFkbWluIjpmYWxzZSwiZXhlY3V0ZSI6dHJ1ZSwiY3JlYXRlIjp0cnVlLCJyZW5hbWUiOnRydWUsIm1vZGlmeSI6dHJ1ZSwiZGVsZXRlIjp0cnVlLCJzaGFyZSI6dHJ1ZSwiZG93bmxvYWQiOnRydWV9LCJjb21tYW5kcyI6W10sImxvY2tQYXNzd29yZCI6ZmFsc2UsImhpZGVEb3RmaWxlcyI6ZmFsc2UsImRhdGVGb3JtYXQiOmZhbHNlfSwiaXNzIjoiRmlsZSBCcm93c2VyIiwiZXhwIjoxNzQ4OTIwODQ1LCJpYXQiOjE3NDg5MTM2NDV9.T4-tsLUNtTT2iZKK2KZaJsZ5m-GCLnnRVcSmt6n376Q&inline=true&key=1748913665205') 30 round;
+      border-radius: 15px;
+      box-shadow: 0 0 25px rgba(255,255,255,0.2);
+      text-align: center;
+      font-family: sans-serif;
+    ">
+      <h2 style="margin-top: 0;">👋 Welcome!</h2>
+      <p>This is a simple archive of past Discord events, messages, and content. Use it to explore or revisit moments. If you find any issues, feel free to use the contact button!</p>
+      <button onclick="closeWelcome()" style="
+        margin-top: 15px;
+        padding: 8px 20px;
+        font-size: 16px;
+        background-color: #444;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      ">Close</button>
+    </div>
   </div>
 
   <script>
-  // Fade in welcome modal on load
-  window.onload = () => {
-  const modal = document.getElementById('welcomeModal');
-  modal.style.opacity = '1';
-  modal.style.pointerEvents = 'auto';
-  };
+    // Fade in welcome modal on load
+    window.onload = () => {
+    const modal = document.getElementById('welcomeModal');
+    modal.style.opacity = '1';
+    modal.style.pointerEvents = 'auto';
+    };
 
-  function closeWelcome() {
-  const modal = document.getElementById('welcomeModal');
-  modal.style.opacity = '0';
-  modal.style.pointerEvents = 'none';
-  }
+    function closeWelcome() {
+    const modal = document.getElementById('welcomeModal');
+    modal.style.opacity = '0';
+    modal.style.pointerEvents = 'none';
+    }
   </script>
 
   <!-- Contact Button -->
