@@ -39,6 +39,7 @@
       animation: glow 3s infinite alternate;
       text-align: center;
       transition: background-color 0.5s ease, color 0.5s ease;
+      z-index: 1;
     }
 
     body.dark-mode .panel {
@@ -225,9 +226,98 @@
       font-weight: bold;
       color: #f00;
     }
+
+    /* === New styles for Welcome Screen === */
+    #welcomeScreen {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(255, 255, 255, 0.95);
+      color: black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 30px;
+      box-sizing: border-box;
+      z-index: 3000;
+      opacity: 1;
+      transition: opacity 0.5s ease;
+    }
+
+    body.dark-mode #welcomeScreen {
+      background: rgba(20, 20, 20, 0.95);
+      color: white;
+    }
+
+    #welcomeContent {
+      max-width: 400px;
+      text-align: center;
+      border-radius: 15px;
+      padding: 20px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+      background-color: inherit;
+    }
+
+    #welcomeContent h2 {
+      margin-top: 0;
+    }
+
+    #welcomeContent p {
+      margin: 20px 0;
+      font-size: 16px;
+      line-height: 1.4;
+    }
+
+    #welcomeCloseBtn {
+      margin-top: 20px;
+      padding: 10px 24px;
+      font-size: 16px;
+      font-weight: bold;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      background-color: #0077ff;
+      color: white;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+      transition: background-color 0.3s ease;
+    }
+
+    #welcomeCloseBtn:hover {
+      background-color: #005fa3;
+    }
+
+    body.dark-mode #welcomeCloseBtn {
+      background-color: #3399ff;
+      color: #222;
+    }
+
+    body.dark-mode #welcomeCloseBtn:hover {
+      background-color: #1a75ff;
+      color: white;
+    }
+
+    /* Fade out effect */
+    #welcomeScreen.fade-out {
+      opacity: 0;
+      pointer-events: none;
+    }
   </style>
 </head>
 <body>
+  <!-- Welcome Screen -->
+  <div id="welcomeScreen" role="dialog" aria-modal="true" aria-labelledby="welcomeTitle" aria-describedby="welcomeDesc">
+    <div id="welcomeContent">
+      <h2 id="welcomeTitle">Welcome to Meow Archive!</h2>
+      <p id="welcomeDesc">
+        This archive is your gateway to a wide collection of curated content, including quotes, memes, positivity, art, and more.<br><br>
+        Use the navigation links to explore different sections. Don't hesitate to use the Settings button to toggle dark mode or background options.<br><br>
+        Enjoy your visit!
+      </p>
+      <button id="welcomeCloseBtn" aria-label="Close welcome screen">Close</button>
+    </div>
+  </div>
+
   <div class="button-container">
     <button id="contactBtn">Contact</button>
     <button id="settingsBtn">Settings</button>
@@ -267,9 +357,9 @@
   <div id="settingsModal" class="modal">
     <div class="modal-content">
       <h2>Settings</h2>
-      <label><input type="checkbox" id="darkModeToggle" /> Dark Mode</label><br><br>
-      <label><input type="checkbox" id="bgToggle" /> Background Enabled</label>
-      <div class="close" onclick="closeModal('settingsModal')">Close</div>
+      <label><input type="checkbox" id="darkModeToggle" /> Dark Mode</label><br />
+      <label><input type="checkbox" id="noBackgroundToggle" /> Remove Background</label><br />
+      <button id="settingsCloseBtn">Close</button>
     </div>
   </div>
 
@@ -277,65 +367,100 @@
   <div id="contactModal" class="modal">
     <div class="modal-content">
       <h2>Contact</h2>
-      <p>Email: meow@example.com<br>Discord: Meow#1234</p>
-      <div class="close" onclick="closeModal('contactModal')">Close</div>
+      <p>Email: meowarchive@example.com</p>
+      <button id="contactCloseBtn">Close</button>
     </div>
   </div>
 
-  <!-- Patch Notes Modal -->
+  <!-- Update Notes Modal -->
   <div id="updateModal" class="modal">
     <div class="modal-content">
-      <h2>Patch Notes</h2>
-      <p>v25.0603<br>• Dark mode fully supported<br>• Settings modal added<br>• Background toggle available</p>
-      <div class="close" onclick="closeModal('updateModal')">Close</div>
+      <h2>Update Notes</h2>
+      <p>Version 25.0603 includes the new welcome screen, improved dark mode, and updated navigation.</p>
+      <button id="updateCloseBtn">Close</button>
     </div>
   </div>
 
   <script>
-    const darkModeKey = 'darkMode';
-    const bgKey = 'backgroundEnabled';
+    // Welcome screen close button
+    const welcomeScreen = document.getElementById('welcomeScreen');
+    const welcomeCloseBtn = document.getElementById('welcomeCloseBtn');
 
-    // Event listeners for modals
-    document.getElementById('settingsBtn').onclick = () => {
-      document.getElementById('settingsModal').style.display = 'flex';
-    };
-    document.getElementById('contactBtn').onclick = () => {
-      document.getElementById('contactModal').style.display = 'flex';
-    };
-    document.getElementById('updateBtn').onclick = () => {
-      document.getElementById('updateModal').style.display = 'flex';
-    };
-
-    function closeModal(id) {
-      document.getElementById(id).style.display = 'none';
-    }
-
-    // Toggle switches
-    const darkToggle = document.getElementById('darkModeToggle');
-    const bgToggle = document.getElementById('bgToggle');
-
-    darkToggle.addEventListener('change', () => {
-      document.body.classList.toggle('dark-mode', darkToggle.checked);
-      localStorage.setItem(darkModeKey, darkToggle.checked ? 'true' : 'false');
+    welcomeCloseBtn.addEventListener('click', () => {
+      // Add fade-out class for smooth fade
+      welcomeScreen.classList.add('fade-out');
+      // Remove from DOM after fade-out duration (0.5s)
+      setTimeout(() => {
+        welcomeScreen.style.display = 'none';
+      }, 500);
     });
 
-    bgToggle.addEventListener('change', () => {
-      document.body.classList.toggle('no-background', !bgToggle.checked);
-      localStorage.setItem(bgKey, bgToggle.checked ? 'true' : 'false');
+    // Settings modal
+    const settingsBtn = document.getElementById('settingsBtn');
+    const settingsModal = document.getElementById('settingsModal');
+    const settingsCloseBtn = document.getElementById('settingsCloseBtn');
+    const darkModeToggle = document.getElementById('darkModeToggle');
+    const noBackgroundToggle = document.getElementById('noBackgroundToggle');
+
+    settingsBtn.addEventListener('click', () => {
+      settingsModal.style.display = 'flex';
+      // Load saved settings
+      darkModeToggle.checked = document.body.classList.contains('dark-mode');
+      noBackgroundToggle.checked = document.body.classList.contains('no-background');
     });
 
-    // On page load
-    if (localStorage.getItem(darkModeKey) === 'true') {
-      document.body.classList.add('dark-mode');
-      darkToggle.checked = true;
-    }
+    settingsCloseBtn.addEventListener('click', () => {
+      settingsModal.style.display = 'none';
+    });
 
-    if (localStorage.getItem(bgKey) === 'false') {
-      document.body.classList.add('no-background');
-      bgToggle.checked = false;
-    } else {
-      bgToggle.checked = true;
-    }
+    darkModeToggle.addEventListener('change', () => {
+      if (darkModeToggle.checked) {
+        document.body.classList.add('dark-mode');
+      } else {
+        document.body.classList.remove('dark-mode');
+      }
+    });
+
+    noBackgroundToggle.addEventListener('change', () => {
+      if (noBackgroundToggle.checked) {
+        document.body.classList.add('no-background');
+      } else {
+        document.body.classList.remove('no-background');
+      }
+    });
+
+    // Contact modal
+    const contactBtn = document.getElementById('contactBtn');
+    const contactModal = document.getElementById('contactModal');
+    const contactCloseBtn = document.getElementById('contactCloseBtn');
+
+    contactBtn.addEventListener('click', () => {
+      contactModal.style.display = 'flex';
+    });
+
+    contactCloseBtn.addEventListener('click', () => {
+      contactModal.style.display = 'none';
+    });
+
+    // Update notes modal
+    const updateBtn = document.getElementById('updateBtn');
+    const updateModal = document.getElementById('updateModal');
+    const updateCloseBtn = document.getElementById('updateCloseBtn');
+
+    updateBtn.addEventListener('click', () => {
+      updateModal.style.display = 'flex';
+    });
+
+    updateCloseBtn.addEventListener('click', () => {
+      updateModal.style.display = 'none';
+    });
+
+    // Close modals on outside click
+    window.addEventListener('click', (e) => {
+      if (e.target === settingsModal) settingsModal.style.display = 'none';
+      if (e.target === contactModal) contactModal.style.display = 'none';
+      if (e.target === updateModal) updateModal.style.display = 'none';
+    });
   </script>
 </body>
 </html>
