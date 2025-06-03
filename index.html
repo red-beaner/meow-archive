@@ -49,7 +49,6 @@
       text-decoration: underline;
     }
 
-    /* Dropdown styles */
     .dropdown {
       position: relative;
     }
@@ -75,10 +74,82 @@
       display: block;
       padding: 5px 0;
     }
+
+    /* Welcome Popup */
+    .welcome-modal {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: rgba(0, 0, 0, 0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 1s ease;
+      z-index: 9999;
+    }
+
+    .welcome-modal.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .welcome-box {
+      position: relative;
+      background: #111;
+      color: white;
+      padding: 30px;
+      border-radius: 20px;
+      max-width: 500px;
+      width: 90%;
+      text-align: center;
+      font-family: sans-serif;
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    .glow-border {
+      position: absolute;
+      top: -4px; bottom: -4px;
+      left: -4px; right: -4px;
+      border-radius: 24px;
+      background: linear-gradient(270deg, #ff00cc, #3333ff, #00ffcc, #ffcc00);
+      background-size: 600% 600%;
+      animation: borderGlow 8s ease infinite;
+      z-index: -1;
+      filter: blur(8px);
+    }
+
+    @keyframes borderGlow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .welcome-box button {
+      margin-top: 15px;
+      padding: 8px 20px;
+      font-size: 16px;
+      background-color: #444;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
 
+  <!-- Welcome Popup -->
+  <div id="welcomeModal" class="welcome-modal">
+    <div class="welcome-box">
+      <div class="glow-border"></div>
+      <h2>👋 Welcome!</h2>
+      <p>Welcome to the Meow Archive — a playful collection of Discord content and memories. Enjoy your visit!</p>
+      <button onclick="closeWelcome()">Close</button>
+    </div>
+  </div>
 
   <!-- Contact Button -->
   <button onclick="document.getElementById('contactModal').style.display='block'" style="position: fixed; bottom: 20px; right: 20px; padding: 10px 20px; font-size: 16px;">
@@ -97,6 +168,7 @@
     </div>
   </div>
 
+  <!-- Main Content -->
   <div class="panel">
     <h1>Meow Archive</h1>
     <h3>Version 25.0514</h3>
@@ -106,17 +178,12 @@
       <li><a href="intros.html">#introductions</a></li>
       <li><a href="memes.html">#memes</a></li>
       <li><a href="positivity.html">#positivity-place</a></li>
-      <!-- <li><a href="hobbies.html">#hobbies-and-interests</a></li> -->
       <li><a href="distractedbf.html">#bot-commands(distractedbf)</a></li>
       <li><a href="confess.html">#confessions</a></li>
       <li><a href="diary.html">#diary</a></li>
-      <!-- <li><a href="clipsandlinks.html">#clips-and-links</a></li>
-      <li><a href="workout.html">#workout</a></li> -->
       <li><a href="art.html">#art</a></li>
       <li><a href="dream.html">#dream-journal</a></li>
-      <!-- <li><a href="food.html">#food</a></li> -->
       <li><a href="cownting.html">#counting (the big streak)</a></li>
-
       <li class="dropdown">
         <a href="#">Forums ▼</a>
         <div class="dropdown-content">
@@ -131,97 +198,19 @@
       </li>
     </ul>
   </div>
-  <!-- Welcome Popup -->
-<div id="welcomeModal" class="welcome-modal">
-  <div class="welcome-box">
-    <div class="glow-border"></div>
-    <h2>👋 Welcome!</h2>
-    <p>
-      This is a simple archive of past Discord events, messages, and content. Use it to explore or revisit moments.  
-      If you find any issues, feel free to use the contact button!
-    </p>
-    <button onclick="closeWelcome()">Close</button>
-  </div>
-</div>
 
-<style>
-/* Modal Background */
-.welcome-modal {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100vw; height: 100vh;
-  background: rgba(0, 0, 0, 0.6);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 1s ease;
-  z-index: 9999;
-}
+  <!-- Scripts -->
+  <script>
+    window.onload = () => {
+      const modal = document.getElementById("welcomeModal");
+      modal.classList.add("active");
+    };
 
-/* Welcome Box */
-.welcome-box {
-  position: relative;
-  background: #111;
-  color: white;
-  padding: 30px;
-  border-radius: 20px;
-  max-width: 500px;
-  width: 90%;
-  text-align: center;
-  font-family: sans-serif;
-  z-index: 1;
-  overflow: hidden;
-}
-
-/* Glowing Border Animation */
-.glow-border {
-  content: "";
-  position: absolute;
-  top: -4px; bottom: -4px;
-  left: -4px; right: -4px;
-  border-radius: 24px;
-  background: linear-gradient(270deg, #ff00cc, #3333ff, #00ffcc, #ffcc00);
-  background-size: 600% 600%;
-  animation: borderGlow 8s ease infinite;
-  z-index: -1;
-  filter: blur(8px);
-}
-
-/* Keyframe Animation */
-@keyframes borderGlow {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-/* Close Button */
-.welcome-box button {
-  margin-top: 15px;
-  padding: 8px 20px;
-  font-size: 16px;
-  background-color: #444;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-</style>
-
-<script>
-window.onload = () => {
-  const modal = document.getElementById("welcomeModal");
-  modal.style.opacity = "1";
-  modal.style.pointerEvents = "auto";
-};
-
-function closeWelcome() {
-  const modal = document.getElementById("welcomeModal");
-  modal.style.opacity = "0";
-  modal.style.pointerEvents = "none";
-}
-</script>
+    function closeWelcome() {
+      const modal = document.getElementById("welcomeModal");
+      modal.classList.remove("active");
+    }
+  </script>
 
 </body>
 </html>
