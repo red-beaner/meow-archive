@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     <button onclick="togglePanel('settings')">Settings</button>
     <button onclick="togglePanel('contact')">Contact</button>
     <button onclick="togglePanel('updates')">Update Notes</button>
+    <button onclick="togglePanel('nav')">Navigation</button>
 
     <div id="settings-panel" style="display:none">
       <h2>Settings</h2>
@@ -28,6 +29,12 @@ document.addEventListener('DOMContentLoaded', () => {
       <h2>Update Notes</h2>
       <p>Version 25.0603 includes the new welcome screen, improved dark mode, and updated navigation.</p>
       <button onclick="closePanel('updates')">Close</button>
+    </div>
+
+    <div id="navigation-panel" style="display:none">
+      <h2>Navigation</h2>
+      <p>#memes</p>
+      <buton onclick="closePanel('nav')">Close</button>
     </div>
   `;
   document.body.appendChild(bar);

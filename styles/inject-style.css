@@ -44,7 +44,7 @@ body.no-bg {
   color: white;
 }
 
-#settings-panel, #contact-panel, #updates-panel {
+#settings-panel, #contact-panel, #updates-panel, #navigation-panel {
   position: fixed;
   top: 80px;
   left: 50%;
