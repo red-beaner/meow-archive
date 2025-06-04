@@ -56,6 +56,7 @@ function togglePanel(panel) {
   document.getElementById('settings-panel').style.display = 'none';
   document.getElementById('contact-panel').style.display = 'none';
   document.getElementById('updates-panel').style.display = 'none';
+  document.getElementById('navigation-panel').style.display = 'none';
   document.getElementById(`${panel}-panel`).style.display = 'block';
 }
 
