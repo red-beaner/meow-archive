@@ -98,81 +98,69 @@
 
 
 
+<!-- Keep this open so parts are loaded into it -->
 <div id="content">
-<h1>Donny Dump Archive</h1>
-<div class="loading" id="loader">Loading messages...</div>
-</div><script>
-    const content = document.getElementById("content");
-    const loader = document.getElementById("loader");
-    let currentPart = 1;
-    let loading = false;
-    let finished = false;
+  <h1>Donny Dump Archive</h1>
+  <div class="loading" id="loader">Loading messages...</div>
+</div>
 
-    async function loadNextPart() {
-      if (loading || finished) return;
-      loading = true;
-      loader.textContent = `Loading part ${currentPart}...`;
+<!-- Lazy loading and spoiler logic -->
+<script>
+  const content = document.getElementById("content");
+  const loader = document.getElementById("loader");
+  let currentPart = 1;
+  let loading = false;
+  let finished = false;
 
-      try {
-        // 👇 Change here: look in "donnydump_parts" folder
-        const res = await fetch(`donnydump_parts/Donypart${currentPart}.html`);
-        if (!res.ok) {
-          finished = true;
-          loader.textContent = "All messages loaded.";
-          return;
-        }
+  async function loadNextPart() {
+    if (loading || finished) return;
+    loading = true;
+    loader.textContent = `Loading part ${currentPart}...`;
 
-        const html = await res.text();
-        const wrapper = document.createElement("div");
-        wrapper.innerHTML = html;
-        content.insertBefore(wrapper, loader);
-
-        currentPart++;
-        loading = false;
-      } catch (err) {
-        console.error(err);
-        loader.textContent = "Error loading messages.";
+    try {
+      const res = await fetch(`donnydump_parts/Donypart${currentPart}.html`);
+      if (!res.ok) {
+        finished = true;
+        loader.textContent = "All messages loaded.";
+        return;
       }
+
+      const html = await res.text();
+      const wrapper = document.createElement("div");
+      wrapper.innerHTML = html;
+      content.insertBefore(wrapper, loader);
+
+      currentPart++;
+      loading = false;
+    } catch (err) {
+      console.error(err);
+      loader.textContent = "Error loading messages.";
     }
+  }
 
-    // Load the first part immediately
-    loadNextPart();
+  loadNextPart();
 
-    // Load more parts as user scrolls
-    window.addEventListener("scroll", () => {
-      const nearBottom = window.innerHeight + window.scrollY >= document.body.offsetHeight - 200;
-      if (nearBottom) {
-        loadNextPart();
-      }
-    });
-
-    document.addEventListener("click", (e) => {
-      let target = e.target;
-
-      // Check if the clicked item is inside a spoiler container
-      while (target && target !== document.body) {
-        if (target.classList.contains("spoiler") || target.classList.contains("chatlog__attachment--spoiler")) {
-          target.classList.toggle("revealed");
-          break;
-        }
-        target = target.parentElement;
-      }
-    });
-
-
-  </script><script>
-    document.addEventListener("click", (e) => {
-      const spoiler = e.target.closest(".chatlog__attachment--hidden");
-      if (spoiler) {
-        spoiler.classList.remove("chatlog__attachment--hidden");
-      }
-    });
-  </script><script>
-    function navigateToPage(page) {
-      if (page) {
-        window.location.href = page;
-      }
+  window.addEventListener("scroll", () => {
+    const nearBottom = window.innerHeight + window.scrollY >= document.body.offsetHeight - 200;
+    if (nearBottom) {
+      loadNextPart();
     }
-  </script><div class="postamble"><div class="postamble__entry">Exported 13 message(s)</div><div class="postamble__entry">Timezone: UTC-5</div></div><script src="/scripts/inject-button-bar.js"></script><script defer="True" src="scripts/inject-button-bar.js"></script></div><script src="scripts/inject-button-bar.js" defer></script>
-</body><link rel="stylesheet" href="styles/inject-style.css">
+  });
+
+  document.addEventListener("click", (e) => {
+    let target = e.target;
+    while (target && target !== document.body) {
+      if (target.classList.contains("spoiler") || target.classList.contains("chatlog__attachment--spoiler")) {
+        target.classList.toggle("revealed");
+        break;
+      }
+      target = target.parentElement;
+    }
+  });
+</script>
+
+<!-- Only one button bar script is needed -->
+<script src="scripts/inject-button-bar.js" defer></script>
+
+</body>
 </html>
