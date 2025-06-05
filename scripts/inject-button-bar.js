@@ -33,34 +33,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
     <div id="navigation-panel" style="display:none">
       <h2>Navigation</h2>
-      // <p><a href="https://red-beaner.github.io/meow-archive/memes.html">#memes</a></p>
-      // <p><a href="https://red-beaner.github.io/meow-archive/quotes.html">#quotes</a></p>
-      // <p><a href="https://red-beaner.github.io/meow-archive/intros.html">#introductions</a></p>
-      // <p><a href="https://red-beaner.github.io/meow-archive/positivity.html">#positivity-place</a></p>
-      // <p><a href="https://red-beaner.github.io/meow-archive/distractedbf.html">#distracted-bf</a></p>
-      // <p><a href="https://red-beaner.github.io/meow-archive/art.html">#art</a></p>
-      // <p><a href="https://red-beaner.github.io/meow-archive/diary.html">#diary</a></p>
-      // <p><a href="https://red-beaner.github.io/meow-archive/dream.html">#dream</a></p>
-      // <p><a href="https://red-beaner.github.io/meow-archive/confess.html">#confessions</a></p>
-      // <p><a href="https://red-beaner.github.io/meow-archive/donnydump-path.html">#dony-dump</a></p>
-      // <p><a href="https://red-beaner.github.io/meow-archive/caughtin4k.html">#caught-in-4k</a></p>
-      // <p><a href="https://red-beaner.github.io/meow-archive/kitastare.html">#kita-stare</a></p>
-      // <p><a href="https://red-beaner.github.io/meow-archive/maddiespussies.html">#maddie's-pussies</a></p>
-      // <p><a href="https://red-beaner.github.io/meow-archive/onewordstory.html">#one-word-story</a></p>
-      // <p><a href="https://red-beaner.github.io/meow-archive/xscream2.html">#xscrem2</a></p>
-      // <p><a href="https://red-beaner.github.io/meow-archive/finishthesong.html">#finish-the-song</a></p>
-        <p>
-          <a href="#" aria-haspopup="true" aria-expanded="false">#special-files ▼</a>
-              <div class="dropdown-content" role="menu" aria-label="Special files submenu">
-                <a href="donnydump-path.html" role="menuitem">donydump</a>
-                <a href="caughtin4k.html" role="menuitem">caught in 4k</a>
-                <a href="kitastare.html" role="menuitem">kitastare</a>
-                <a href="maddiespussies.html" role="menuitem">maddie's pussies</a>
-                <a href="onewordstory.html" role="menuitem">one word story</a>
-                <a href="xscream2.html" role="menuitem">xscream2</a>
-                <a href="finishthesong.html" role="menuitem">finish the song</a>
-              </div>
-        </p>
+      
+        <ul>
+          <li><a href="quotes.html">#quotes</a></li>
+          <li><a href="intros.html">#introductions</a></li>
+          <li><a href="memes.html">#memes</a></li>
+          <li><a href="positivity.html">#positivity-place</a></li>
+          <!-- <li><a href="hobbies.html">#hobbies-and-interests</a></li> -->
+          <li><a href="distractedbf.html">#bot-commands(distractedbf)</a></li>
+          <li><a href="art.html">#art</a></li>
+          <li><a href="diary.html">#diary</a></li>
+          <li><a href="dream.html">#dream journal</a></li>
+          <li><a href="confess.html">confessions</a></li>
+          <li class="dropdown" aria-haspopup="true" aria-expanded="false">
+            
+          </li>
+        </ul>
 
       <buton onclick="closePanel('navigation')">Close</button>
     </div>
