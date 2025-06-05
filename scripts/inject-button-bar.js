@@ -46,14 +46,14 @@ document.addEventListener('DOMContentLoaded', () => {
           <li><a href="dream.html">#dream journal</a></li>
           <li><a href="confess.html">confessions</a></li>
           <li class="dropdown" aria-haspopup="true" aria-expanded="false">
-            <a href="#" aria-haspopup="true" aria-expanded="false">#special-files ▼</a>
+            <a href="#" aria-haspopup="true" aria-expanded="false">#forms ▼</a>
             <div class="dropdown-content" role="menu" aria-label="Special files submenu">
-              <a href="donnydump-path.html" role="menuitem">donydump</a>
-              <a href="caughtin4k.html" role="menuitem">caught in 4k</a>
-              <a href="kitastare.html" role="menuitem">kitastare</a>
-              <a href="maddiespussies.html" role="menuitem">maddie's pussies</a>
-              <a href="onewordstory.html" role="menuitem">one word story</a>
-              <a href="xscream2.html" role="menuitem">xscream2</a>
+              <a href="donnydump-path.html" role="menuitem">donydump,</a>
+              <a href="caughtin4k.html" role="menuitem">caught in 4k,</a>
+              <a href="kitastare.html" role="menuitem">kitastare,</a>
+              <a href="maddiespussies.html" role="menuitem">maddie's pussies,</a>
+              <a href="onewordstory.html" role="menuitem">one word story,</a>
+              <a href="xscream2.html" role="menuitem">xscream2,</a>
               <a href="finishthesong.html" role="menuitem">finish the song</a>
             </div>
           </li>
