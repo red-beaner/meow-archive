@@ -33,7 +33,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
     <div id="navigation-panel" style="display:none">
       <h2>Navigation</h2>
-      <p>#memes</p>
+      <p><a href="https://red-beaner.github.io/meow-archive/memes.html">#memes</a></p>
+      <p><a href="https://red-beaner.github.io/meow-archive/quotes.html">#quotes</a></p>
+      <p><a href="https://red-beaner.github.io/meow-archive/intros.html">#introductions</a></p>
+      <p><a href="https://red-beaner.github.io/meow-archive/positivity.html">#positivity-place</a></p>
+      <p><a href="https://red-beaner.github.io/meow-archive/distractedbf.html">#distracted-bf</a></p>
+      <p><a href="https://red-beaner.github.io/meow-archive/art.html">#art</a></p>
+      <p><a href="https://red-beaner.github.io/meow-archive/diary.html">#diary</a></p>
+      <p><a href="https://red-beaner.github.io/meow-archive/dream.html">#dream</a></p>
+      <p><a href="https://red-beaner.github.io/meow-archive/confess.html">#confessions</a></p>
+      <p><a href="https://red-beaner.github.io/meow-archive/donnydump-path.html">#dony-dump</a></p>
+      <p><a href="https://red-beaner.github.io/meow-archive/caughtin4k.html">#caught-in-4k</a></p>
+      <p><a href="https://red-beaner.github.io/meow-archive/kitastare.html">#kita-stare</a></p>
+      <p><a href="https://red-beaner.github.io/meow-archive/maddiespussies.html">#maddie's-pussies</a></p>
+      <p><a href="https://red-beaner.github.io/meow-archive/onewordstory.html">#one-word-story</a></p>
+      <p><a href="https://red-beaner.github.io/meow-archive/xscream2.html">#xscrem2</a></p>
+      <p><a href="https://red-beaner.github.io/meow-archive/finishthesong.html">#finish-the-song</a></p>
+
       <buton onclick="closePanel('navigation')">Close</button>
     </div>
   `;
